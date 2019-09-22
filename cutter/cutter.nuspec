@@ -13,7 +13,7 @@
     <authors>radareorg</authors>
     <!-- projectUrl is required for the community feed -->
     <projectUrl>https://cutter.re</projectUrl>
-    <iconUrl>http://cdn.rawgit.com/radareorg/cutter/master/src/img/cutter.ico</iconUrl>
+    <iconUrl>http://cdn.rawgit.com/radareorg/cutter/master/src/img/cutter.svg</iconUrl>
     <copyright>2017-2019 cutter radareorg</copyright>
     <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
