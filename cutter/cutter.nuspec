@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>cutter</id>
+    <version>1.9.0</version>
+    <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
+    <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
+    <owners>GustavoLCR</owners>
+
+    <title>Cutter</title>
+    <authors>radareorg</authors>
+    <!-- projectUrl is required for the community feed -->
+    <projectUrl>https://cutter.re</projectUrl>
+    <iconUrl>http://cdn.rawgit.com/radareorg/cutter/master/src/img/cutter.ico</iconUrl>
+    <copyright>2017-2019 cutter radareorg</copyright>
+    <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/radareorg/cutter</projectSourceUrl>
+    <docsUrl>https://cutter.re/docs</docsUrl>
+    <bugTrackerUrl>https://github.com/radareorg/cutter/issues</bugTrackerUrl>
+    <tags>cutter radare2 analysis reverse-engeneering forensics</tags>
+    <summary>Cutter is a free and open-source GUI for radare2 reverse engineering framework.</summary>
+    <description>Cutter is a free and open-source GUI for radare2 reverse engineering framework. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
+    <releaseNotes>
+This release comes bundled with the r2ghidra Decompiler. Enjoy r2con 2019!
+
+## Additions
+* Bundle r2ghidra-dec
+* Select highlighted variable in EditVariablesDialog if possible. (#1727)
+* Allow seeking in unsynchronized widgets using 'g'. (#1731)
+* Decompiler Auto-Refresh (#1724)
+* Make Decompilation asynchronous (#1721)
+* Add context menu entries for target address (#1712)
+* Add context menu to PseudocodeWidget (#1702)
+* Graphviz based graph layout (#1691)
+* Graph edge highlight (#1693)
+* Added QtVersion inside AboutDialog
+* Updated DisasWidget zoom shortcuts
+* Remember last selected Decompiler
+* Add Plugin Interface for Decompilers
+* Add a generic Decompiler interface and remove pdc (#1659)
+* Add scrolling to DisassemblyWidget left panel
+* Sync PseudocodeWidget with Seek (#1648)
+* Use KSyntaxHighlighting (#1645)
+* Add Loading ~/.cutterrc (#1644)
+## Fixes and Changes
+* Rename PseudoCode widget to Decompiler (#1728)
+* Center Rename Dialogs (#1743)
+* Update radare2 to 3.8.0
+* Fix unnecessary Auto-Decompile on Seek (#1734)
+* Read global offset when opening a new hexdump widget. (#1732)
+* Common behaviour for lists with items that have address (#1700, #1718)
+* Increase asm.tabs indention
+* Fix Main Task Synchronization (#1723)
+* Fix Disassembly widget focus detection. (#1720)
+* Refactor Decompiled Code Structure (#1717)
+* Fix Segfault after changing Decompiler (Fix #1705) (#1715)
+* Restore cursor after making empty selection. (#1714)
+* Don't interpret data as code in xrefs from table. (#1710)
+* Improve InitialOptionsDialog and modify UI terminology for analysis (#1669)
+* Fix out of bounds memory access. (#1697)
+* Fixed file name display in new file dialog (#1675)
+* Allow returning to top level in sdb widget. (#1696)
+* Fix memory leak in sdbListKeys. (#1695)
+* Fix ClassesWidget sorting by vtable offset (#1686)
+* Transfer zoom events from overview to main graph. (#1685)
+* Use bundled radare2 as ExternalProject in cmake (#1674)
+* Don't use scr.html in CommandTask (#1683)
+* Fix arrow offset when scrolling with arrows or zooming in. (#1677)
+* Docker: Move to alpine; Use multistage building
+* Rewrite raise memory widget functionality (#1654)
+* Unify preferences layouts (#1670)
+* Use more specific stylesheet selecters. (#1668)
+* Adjust arrow offset calculation.
+* Make penSizePix thinner
+* Improve arrow widget
+* First implementation of new disassembly widget
+* Make Syntax Highlighter react to Theme Changes (#1650)
+    </releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
