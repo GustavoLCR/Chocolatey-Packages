@@ -1,5 +1,5 @@
-﻿$doDeleteCfg = Read-Host "Do you wish to delete your configuration profile? (y/N)"
-if ($doDeleteCfg.Contains("y")) {
+﻿$doDeleteCfg = Read-Host "Do you wish to delete your configuration profile? (Y/n)"
+if (!$doDeleteCfg -or $doDeleteCfg.Contains("y")) {
 	Remove-Item -Path "$env:APPDATA\\RadareOrg\\*cutter*" -Recurse -ErrorAction SilentlyContinue
 }
 

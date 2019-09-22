@@ -1,5 +1,5 @@
 ﻿$ErrorActionPreference = 'Stop';
-$installDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)" | Split-Path -Parent
+$installDir = $env:ChocolateyPackageFolder
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
@@ -22,12 +22,12 @@ $shortcutArgs = @{
 }
 $shortcutName = '\Cutter.lnk'
 
-$doCreateShortcut = Read-Host "Do you want to create a shortcut in the Desktop? (y/N)"
-if ($doCreateShortcut.Contains('y')) {
+$doCreateShortcut = Read-Host "Do you want to create a shortcut in the Desktop? (Y/n)"
+if (!$doCreateShortcut -or $doCreateShortcut.Contains('y')) {
   Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath  $([Environment]::GetFolderPath("Desktop") + "$shortcutName")
 }
 
-$doCreateShortcut = Read-Host "Do you want to create a shortcut in the Start Menu? (y/N)"
-if ($doCreateShortcut.Contains('y')) {
+$doCreateShortcut = Read-Host "Do you want to create a shortcut in the Start Menu? (Y/n)"
+if (!$doCreateShortcut -or $doCreateShortcut.Contains('y')) {
   Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath $([Environment]::GetFolderPath("StartMenu") + $shortcutName)
 }
