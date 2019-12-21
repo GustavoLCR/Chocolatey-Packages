@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>1.9.0</version>
+    <version>1.10.0</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -20,67 +20,146 @@
     <projectSourceUrl>https://github.com/radareorg/cutter</projectSourceUrl>
     <docsUrl>https://cutter.re/docs</docsUrl>
     <bugTrackerUrl>https://github.com/radareorg/cutter/issues</bugTrackerUrl>
-    <tags>cutter radare2 analysis reverse-engeneering forensics</tags>
+    <tags>cutter analysis debugger decompiler disassembler forensics radare2 reverse-engineering</tags>
     <summary>Cutter is a free and open-source GUI for radare2 reverse engineering framework.</summary>
     <description>Cutter is a free and open-source GUI for radare2 reverse engineering framework. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
-This release comes bundled with the r2ghidra Decompiler. Enjoy r2con 2019!
+## This release comes with the long promised native and remote debugging support. Celebrate the end of the year with Cutter 1.10!
 
-## Additions
-* Bundle r2ghidra-dec
-* Select highlighted variable in EditVariablesDialog if possible. (#1727)
-* Allow seeking in unsynchronized widgets using 'g'. (#1731)
-* Decompiler Auto-Refresh (#1724)
-* Make Decompilation asynchronous (#1721)
-* Add context menu entries for target address (#1712)
-* Add context menu to PseudocodeWidget (#1702)
-* Graphviz based graph layout (#1691)
-* Graph edge highlight (#1693)
-* Added QtVersion inside AboutDialog
-* Updated DisasWidget zoom shortcuts
-* Remember last selected Decompiler
-* Add Plugin Interface for Decompilers
-* Add a generic Decompiler interface and remove pdc (#1659)
-* Add scrolling to DisassemblyWidget left panel
-* Sync PseudocodeWidget with Seek (#1648)
-* Use KSyntaxHighlighting (#1645)
-* Add Loading ~/.cutterrc (#1644)
-## Fixes and Changes
-* Rename PseudoCode widget to Decompiler (#1728)
-* Center Rename Dialogs (#1743)
-* Update radare2 to 3.8.0
-* Fix unnecessary Auto-Decompile on Seek (#1734)
-* Read global offset when opening a new hexdump widget. (#1732)
-* Common behaviour for lists with items that have address (#1700, #1718)
-* Increase asm.tabs indention
-* Fix Main Task Synchronization (#1723)
-* Fix Disassembly widget focus detection. (#1720)
-* Refactor Decompiled Code Structure (#1717)
-* Fix Segfault after changing Decompiler (Fix #1705) (#1715)
-* Restore cursor after making empty selection. (#1714)
-* Don't interpret data as code in xrefs from table. (#1710)
-* Improve InitialOptionsDialog and modify UI terminology for analysis (#1669)
-* Fix out of bounds memory access. (#1697)
-* Fixed file name display in new file dialog (#1675)
-* Allow returning to top level in sdb widget. (#1696)
-* Fix memory leak in sdbListKeys. (#1695)
-* Fix ClassesWidget sorting by vtable offset (#1686)
-* Transfer zoom events from overview to main graph. (#1685)
-* Use bundled radare2 as ExternalProject in cmake (#1674)
-* Don't use scr.html in CommandTask (#1683)
-* Fix arrow offset when scrolling with arrows or zooming in. (#1677)
-* Docker: Move to alpine; Use multistage building
-* Rewrite raise memory widget functionality (#1654)
-* Unify preferences layouts (#1670)
-* Use more specific stylesheet selecters. (#1668)
-* Adjust arrow offset calculation.
-* Make penSizePix thinner
-* Improve arrow widget
-* First implementation of new disassembly widget
-* Make Syntax Highlighter react to Theme Changes (#1650)
+### Currently supported features
+* Multiplatform native debugger
+* Remote debugging using GDB
+* Remote kernel debugging using WinDbg
+* Attaching to a running process
+* STDIO interaction with debugee
+* Support for multi-threading
+* Stack and Registers inspection
+* Backtrace
+* Memory map
+* And much more!
+
+### Planned and in-progress debug features
+* Reverse debugging
+* SIMD register display
+* Hardware breakpoints support
+* Conditional breakpoints
+* Signal handling customization
+* Performance improvements
+* Integration with rarun2 library preload
+* Standalone DLL debugging
+* WinDbg Ethernet protocol support
+
+----
+Note that any kind of contribution is welcome. We are eager to hear your feedback for more debug improvement ideas!
+
+### Known issues
+* Linux breakpoints only work if you are selecting the thread that will hit the breakpoint
+* Function stack variable comments aren't relocated in GDB remote debug
+* Cutter's interface changes size when debug is started/stopped
+* macOS debugging doesn't work without signing the binary
+
+----
+Please give it a try and let us know what you think :)
+
+## Full Changelog
+### Additions
+* Add -F command line option to specify Format (#1946)
+* Define string of length N in address (#1915)
+* Add startRemote to the debug dropdown menu
+* Add a signal for widget rebasing and switch to oodf for remote debug rebasing (#1913)
+* Add debug dialogs (#1903)
+* Add processes widget for kernel and child debugging (#1894)
+* Stdin redirection for locally debugged processes (#1892)
+* gdbserver and windbg remote debugging support (#1874)
+* ThreadsWidget and r2 debugging fixes (#1846)
+* Pressing Enter in disassembly will jump to the desired location (#1910)
+* Add menus to seek backward and forward buttons. (#1889)
+* Add Adikso's Midnight Theme (#1895)
+* Highlight in red changes in the Hexdump Widget (#1880)
+* Add instruction highlight in graph view (#1879)
+* Add highlight to hexdump (#1862)
+* Redirect stdout/stderr to Console Widget (#1821)
+* Add shortcuts to breakpoints widget (#1834)
+* Add common zoom action for widgets using font from configuration (#1813)
+* Implement parsing selected bytes as Yara (#1818)
+* Add search color option feature + sort color options by name (#1803)
+* Add information from aai to Dashboard, fixes #1571 (#1792)
+* Add addressable item context menu to stack widget (#1779)
+* Add more shortcuts to DisassemblyContextMenu (#1782)
+* Graph export without graphviz (#1773)
+* Fixes and Changes
+* Moved the debug exit dialog to DebugActions
+* Update radare2 to 4.1.1 - reantull
+* Use events to notify the user about the debugee's death
+* Fix remote debug crash after the first session
+* Prevent the update of some widgets while debug task is in progress to avoid freezing
+* Switch to registerChanged from seekChanged where possible
+* When using add breakpoint button add it not toggle. (#1953)
+* Workaround for new debug widgets being opened in normal mode. (#1950)
+* Show debug widget menu under Debug. (#1949)
+* Highlight Breakpoints and PC in decompiler (#1948)
+* Fix Segfault on Quit after Debug/Emulation (#1943)
+* Fix automatic function naming (#1942)
+* Increase input field size when resizing NativeDebugDialog. (#1930)
+* Fix formatBytecount's sizes (#1928)
+* Separate the search widget's boundaries for debug and non-debug modes
+* Replace changeDebugView and changeDefinedView with toggleDebugView
+* Removed disabling of startEmul to show the restart debug option when emulating
+* Remove metadata from inkscape icons
+* Remove auto scroll from registerRefs widget
+* Support multi-theme icons on debug
+* Improve debug icons
+* Show icon in menus
+* Use uppercase for program counter name
+* Make labels selectable by mouse
+* Disable auto scroll in stack widget
+* Rename backtrace func name column
+* Auto-select text in EditInstructionDialog
+* Improve RegistersWidget grid UI
+* Improve stack widget ui
+* Remove column of active thread in ThreadsWidget
+* Remove vertical numbers in debug widgets
+* Change label to suspend process
+* Detach Cutter interface from debug command execution (#1857)
+* Look for sym.main instead of main 'cause latter is not rebasing in PIEs
+* Fix PIE debug
+* Hides the ContinueUntilMain button if there is no flag called main
+* Fixes issues with reset layout in debug mode
+* Fix emulation not working after a debugging session
+* Improve seek backward and outside of function in Decompiler widget (#1916)
+* Fix 1756: Disable seek when selecting text on Decompiler Widget (#1917)
+* Coverity Fixes (#1912, #1907)
+* Replace hardcoded system plugin directories with list from Qt. (#1814)
+* Added a temporary fix to allow backslashes names (#1899)
+* Improve compatibility with cmake 3.10. (#1882)
+* Disable asm.lines and asm.bytes in XRefs Preview (Fix #1339) (#1893)
+* Fix Strings Widget for changes in radare2 (#1885)
+* Change focus order in SetToDataDialog. (#1873)
+* Hide and resize hexdump sidebar with heuristics (#1798)
+* Refactored qhelpers AbstractItemView item select (#1850)
+* Fix decompiler widget not updating xrefs to decompiled function (#1851)
+* Automatically select the first line of xref (#1849)
+* Deduplicate seek forward and backward action. (#1844)
+* Show bytes has been renamed and moved (#1841)
+* Replacing all QRegExp with QRegularExpression (#1820)
+* Fix graph zoom reset and use same font size as everything else. (#1835)
+* Fix Native Plugin Loading for CMake (#1829)
+* Fix refresh after renaming imported function (#1828)
+* Improve compatibility with cmake 3.5 and QT 5.5-5.11. (#1805)
+* Allow local development using Docker (#1806)
+* Fix #1802 (newly created graph docks have no title) (#1815)
+* Restore breakpoint listing. (#1811)
+* Use AddressableItemContextMenu in Registers widget. (#1794)
+* Improve about dialog (#1799)
+* Fix crash when using graph shortcut (#1801)
+* Fixed zoom shortcuts to something more generic (#1781)
+* Fix "ta" commands after radare2 command refactoring #1774 (#1775)
+* Fix Segfault on Theme Editor Preview Click
+* Fixed TypeWidget font to monospace. (#1755)
     </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
+    <file src="Cutter-v1.10.0-x64.Windows.zip" />
   </files>
 </package>
