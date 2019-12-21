@@ -21,8 +21,8 @@
     <docsUrl>https://cutter.re/docs</docsUrl>
     <bugTrackerUrl>https://github.com/radareorg/cutter/issues</bugTrackerUrl>
     <tags>cutter analysis debugger decompiler disassembler forensics radare2 reverse-engineering</tags>
-    <summary>Cutter is a free and open-source GUI for radare2 reverse engineering framework.</summary>
-    <description>Cutter is a free and open-source GUI for radare2 reverse engineering framework. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
+    <summary>Cutter is a free and open-source reverse engineering framework powered by radare2.</summary>
+    <description>Cutter is a free and open-source reverse engineering framework powered by radare2. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
 ## This release comes with the long promised native and remote debugging support. Celebrate the end of the year with Cutter 1.10!
 
