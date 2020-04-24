@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>1.10.1</version>
+    <version>1.10.2</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -20,69 +20,27 @@
     <projectSourceUrl>https://github.com/radareorg/cutter</projectSourceUrl>
     <docsUrl>https://cutter.re/docs</docsUrl>
     <bugTrackerUrl>https://github.com/radareorg/cutter/issues</bugTrackerUrl>
-    <tags>cutter analysis debugger decompiler disassembler forensics radare2 reverse-engineering</tags>
+    <tags>cutter analysis debugger decompiler disassembler forensics security radare2 reverse-engineering</tags>
     <summary>Cutter is a free and open-source reverse engineering framework powered by radare2.</summary>
     <description>Cutter is a free and open-source reverse engineering framework powered by radare2. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
-# Highlights
+>Please note: Users encountered issues with the debugger in this release.
+>We're looking into fixing it. If you don't intend to use the debugger, use this release. If yes, please use the previous release, v1.10.1 or the newer v1.10.3.
+>We're sorry for the inconvenience and will release a fixed version soon.
 
-⭐ r2dec decompiler is now shipped by default on all platforms
+---
 
-⭐ radare2 is updated to its newest version - v4.2.1
+This is a minor release to bump the version of radare2 to its latest release.
 
-⭐ Major performance improvements across Cutter
-
-⭐ Remove prefixes from flags and functions to make them prettier
-
-⭐ New dialog to set and edit breakpoints, including hardware and conditional breakpoints
-
-⭐ Improved API for plugin authors
-
-⭐ Faster and better telescoping for Stack and Registers
-
-⭐ Various bug fixes and small improvements
-
-  
-
-## The Arctic World Archive
-
-On February 2, 2020, GitHub will capture a snapshot of every active public repository, to be preserved in the GitHub Arctic Code Vault. This data will be stored on 3,500-foot film reels, provided and encoded by Piql, a Norwegian company that specializes in very-long-term data storage. The film technology relies on silver halides on polyester. This medium has a lifespan of 500 years as measured by the ISO; simulated aging tests indicate Piql’s film will last twice as long.
-
-  
-
-## Additions
-
-* Bundle r2dec into macOS and Linux Builds (#2023, #2033)
-* Show pretty names for flags and functions (#2014)
-* Add realname and libname to Flags and Imports widgets (#2024)
-* Add Breakpoint editor dialog (#1975)
-* Add more breakpoint editing options (#1967)
-* Imporve Register references widget (#2038)
-* Add API for Plugins to extend context menu (#2029)
-* Add a custom telescoping function and improve StackWidget's output (#1990)
-* Make breakpoints available outside of debug (#2027)
-* Add virtual-size to section widget (#2030)
-* Add sha256 and crc32 to the hexdump widget (#2006)
-* Patching: add a ';' delimiter and responsive dialog box, multiple instructions can be patched (#1984)
-* Improve graph HighDPI scaling (#1963)
-* Threads widget now shows the current location in code instead of the thread's path (#15771)
-* Fixes and Changes
-* Update radare2 to 4.2.1 (#2040)
-* Simplify and move Plugin context menu GUI code out of core. (#2039)
-* Make user plugin path in settings a link (#2034)
-* Improve default line-width values on graph (#2026)
-* If available, set r2ghidra the default decompiler (#2007)
-* Improve flag and string widget performance (#2021)
-* Set zoom factor when opening appearance settings. (#2003)
-* Refresh monospace font after it gets reset by style or font change. (#2002)
-* set Style tab to default view (#1986)
-* Fix debug not working with paths that have a space in them (#1978)
-* Refactor breakpoint validation (#15754)
-* Fix multithreaded breakpoint behavior in linux (#15782)
-* Unset breakpoints if continue was interrupted (#15772)
-* Fix crash caused by rebasing a file without sections (#15792)
-* Fix windows process info not showing the correct path for child processes (#15741)
-* Fix function variable information rebasing (#15726)
+### radare2
+* Update the radare2 submodule to its latest release
+### Additions
+* Add bindings for context menus in Python API
+* Show cleaner function names on the disassembly context menu
+* Display Authentihash and Sha256 for Windows PE files
+* Add scaling and background transparency for Graph export
+### Bug Fixes
+* Fix crash when using theme editor
     </releaseNotes>
   </metadata>
   <files>
