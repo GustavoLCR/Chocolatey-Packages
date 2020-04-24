@@ -1,7 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop';
 $installDir = $env:ChocolateyPackageFolder
 
-$zipFile = "$installDir\\Cutter-v1.10.0-x64.Windows.zip"
+$zipFile = "$installDir\\Cutter-v1.10.1-x64.Windows.zip"
 
 $packageArgs = @{
   PackageName    = $env:ChocolateyPackageName
