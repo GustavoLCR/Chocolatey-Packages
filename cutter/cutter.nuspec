@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>1.10.2</version>
+    <version>1.10.3</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -24,23 +24,24 @@
     <summary>Cutter is a free and open-source reverse engineering framework powered by radare2.</summary>
     <description>Cutter is a free and open-source reverse engineering framework powered by radare2. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
->Please note: Users encountered issues with the debugger in this release.
->We're looking into fixing it. If you don't intend to use the debugger, use this release. If yes, please use the previous release, v1.10.1 or the newer v1.10.3.
->We're sorry for the inconvenience and will release a fixed version soon.
+### New features and improvements since 1.10.2:
 
----
+-   Update radare2 to its latest release 4.4.0
+-   Patching and Writing features added to Hexwidget
+-   Flag and comment indicator in Hexwidget
+-   Enhanced Debug experience
+-   Official Appimage build compatibility with Ubuntu 16.04
+-   Light theme improvements
+-   Improved performance
 
-This is a minor release to bump the version of radare2 to its latest release.
+### Windows:
 
-### radare2
-* Update the radare2 submodule to its latest release
-### Additions
-* Add bindings for context menus in Python API
-* Show cleaner function names on the disassembly context menu
-* Display Authentihash and Sha256 for Windows PE files
-* Add scaling and background transparency for Graph export
-### Bug Fixes
-* Fix crash when using theme editor
+-   Updated Qt. If Cutter doesn't start try installing the bundled Microsoft Visual C++ Redistributable.
+
+### Build system changes:
+
+-   Support for CUTTER_USE_BUNDLED_RADARE2=ON on windows
+-   Improve usability of CMake for preparing Linux packages
     </releaseNotes>
   </metadata>
   <files>
