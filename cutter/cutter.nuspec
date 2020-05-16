@@ -87,6 +87,5 @@ On February 2, 2020, GitHub will capture a snapshot of every active public repos
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
-    <file src="Cutter-v1.10.1-x64.Windows.zip" />
   </files>
 </package>

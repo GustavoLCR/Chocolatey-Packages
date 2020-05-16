@@ -5,14 +5,17 @@ $zipFile = "$installDir\\Cutter-v1.10.1-x64.Windows.zip"
 
 $packageArgs = @{
   PackageName    = $env:ChocolateyPackageName
-  Destination    = $installDir
-  FileFullPath64 = $zipFile
+  unzipLocation  = $installDir
+  softwareName   = 'cutter*'
+  url64bit       = 'https://github.com/radareorg/cutter/releases/download/v1.10.1/Cutter-v1.10.1-x64.Windows.zip'
+  checksum64     = '00AEA9440F6A491DC01E4177270BE4F333BF856D9E10B96E0C6D0A0265921EE6'
+  checksumType64 = 'sha256'
 }
 
 New-Item "$installDir\\cutter.exe.gui" -type file -force | Out-Null
 New-Item "$installDir\\vc_redist.x64.exe.ignore" -type file -force | Out-Null
 
-Get-ChocolateyUnzip @packageArgs
+Install-ChocolateyZipPackage @packageArgs
 
 $shortcutArgs = @{
   Description = "Open Cutter"
