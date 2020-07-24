@@ -1,14 +1,14 @@
 $ErrorActionPreference = 'Stop';
 $installDir = $env:ChocolateyPackageFolder
 
-$zipFile = "$installDir\\Cutter-v1.10.3-x64.Windows.zip"
+$zipFile = "$installDir\\Cutter-v1.11.0-x64.Windows.zip"
 
 $packageArgs = @{
   PackageName    = $env:ChocolateyPackageName
   unzipLocation  = $installDir
   softwareName   = 'cutter*'
-  url64bit       = 'https://github.com/radareorg/cutter/releases/download/v1.10.3/Cutter-v1.10.3-x64.Windows.zip'
-  checksum64     = 'CF793013F95ED283DAD29137A50F50B0AF8E820FC42E5F6E5AABA82C5CFAAD96'
+  url64bit       = 'https://github.com/radareorg/cutter/releases/download/v1.11.0/Cutter-v1.11.0-x64.Windows.zip'
+  checksum64     = '46A8E5A3426FB9734FE9B1756612AB574C0A789E45B4EFD6E3B10CB14889041B'
   checksumType64 = 'sha256'
 }
 
@@ -22,7 +22,7 @@ $shortcutArgs = @{
   TargetPath  = "$installDir\\cutter.exe"
   WorkingDirectory = $installDir
 }
-$shortcutName = '\Cutter.lnk'
+$shortcutName = "\\Cutter.lnk"
 
 $doCreateShortcut = Read-Host "Do you want to create a shortcut in the Desktop? (Y/n)"
 if (!$doCreateShortcut -or $doCreateShortcut.Contains('y')) {
