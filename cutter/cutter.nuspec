@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>1.11.0</version>
+    <version>1.11.1</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -24,39 +24,18 @@
     <summary>Cutter is a free and open-source reverse engineering framework powered by radare2.</summary>
     <description>Cutter is a free and open-source reverse engineering framework powered by radare2. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
-## Features
 
-### Graphs
+# Bug Fixes
 
--   Major improvements to graph layout algorithms ([#2207](https://github.com/radareorg/cutter/pull/2207),  [#2255](https://github.com/radareorg/cutter/pull/2255),  [#2246](https://github.com/radareorg/cutter/pull/2246))
--   New Graph widgets: Call-Graph, Global Call Graph, Import Graph and more ([#2273](https://github.com/radareorg/cutter/pull/2273))
--   Support Horizontal Graphs ([#2234](https://github.com/radareorg/cutter/pull/2234))
+-   Include r2dec decompiler in Windows build
+-   Sort items in Resources widget by numeric values instead of numbers misinterpreted as strings  [#2308](https://github.com/radareorg/cutter/pull/2308)
+-   Fix custom color themes not working correctly  [#2376](https://github.com/radareorg/cutter/pull/2376)
+-   Fix a crash when opening the theme editor  [#2359](https://github.com/radareorg/cutter/pull/2359)
+-   Update r2dec, includes  [radareorg/r2dec-js@ff0d57e](https://github.com/radareorg/r2dec-js/commit/ff0d57e5c8e094ed4ad1a3bde9fd0f648ba5bb7f)  fixing common r2dec crash when processing Windows executables
 
-### Layout
+See full list of changes  [here](https://github.com/radareorg/cutter/compare/v1.11.0...v1.11.1)
 
--   Support saving and loading multiple UI layouts ([#2172](https://github.com/radareorg/cutter/pull/2172))
--   Add UI for managing layouts ([#2211](https://github.com/radareorg/cutter/pull/2211))
-
-### Others
-
--   Expose  `asm.reloff`  ([#2243](https://github.com/radareorg/cutter/pull/2243)) and  `asm.reloff.flags`  ([#2244](https://github.com/radareorg/cutter/pull/2244)) in Preferences
--   Command line option to open a file in Write mode ([#2216](https://github.com/radareorg/cutter/pull/2216))
--   Add menu options for changing IO mode ([#2187](https://github.com/radareorg/cutter/pull/2187))
--   Add  [pci](http://book.rada.re/basic_commands/print_modes.html?highlight=pci#high-level-languages-views)  to hexdump widget ([#2219](https://github.com/radareorg/cutter/pull/2219))
--   Toggle Console Widget (Ctrl  +  `  and  :) and clear output (Ctrl  +  L) shortcuts ([#2213](https://github.com/radareorg/cutter/pull/2213))
--   Implement editor for .cutterrc initialization file - an easy way of saving r2 options that aren't otherwise exposed ([#2162](https://github.com/radareorg/cutter/pull/2162))
-
-## Radare2
-
--   Update radare2 to its  [newest release (v4.5)](https://github.com/radareorg/radare2/releases/tag/4.5.0)  and fix renamed configuration variables. ([#2288](https://github.com/radareorg/cutter/pull/2288))
--   Improved analysis
-
-## Documentation
-
--   Introducing improved Contribution Guidelines ([#2293](https://github.com/radareorg/cutter/pull/2293))
--   Add documentation for  `TempConfig`  ([#2221](https://github.com/radareorg/cutter/pull/2221))Update Cutter compilation documentation ([#2238](https://github.com/radareorg/cutter/pull/2238))
--   Setting up development environment and IDE comparison ([#2290](https://github.com/radareorg/cutter/pull/2290))
-    </releaseNotes>
+</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
