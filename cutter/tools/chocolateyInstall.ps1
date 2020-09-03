@@ -1,14 +1,14 @@
 $ErrorActionPreference = 'Stop';
 $installDir = $env:ChocolateyPackageFolder
 
-$zipFile = "$installDir\\Cutter-v1.11.1-x64.Windows.zip"
+$zipFile = "$installDir\\Cutter-v1.12.0-x64.Windows.zip"
 
 $packageArgs = @{
   PackageName    = $env:ChocolateyPackageName
   unzipLocation  = $installDir
   softwareName   = 'cutter*'
-  url64bit       = 'https://github.com/radareorg/cutter/releases/download/v1.11.1/Cutter-v1.11.1-x64.Windows.zip'
-  checksum64     = '1872A8F4A2424A7146E32762C0DB426568801923754648C14024230E589787B1'
+  url64bit       = 'https://github.com/radareorg/cutter/releases/download/v1.12.0/Cutter-v1.12.0-x64.Windows.zip'
+  checksum64     = '6F0688B0BF388D940FED3681020DFE4FBE0522E144A31910B6909CE38BDADB7B'
   checksumType64 = 'sha256'
 }
 
