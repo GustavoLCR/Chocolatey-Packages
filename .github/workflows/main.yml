@@ -1,0 +1,25 @@
+name: 'Weekly Automatic Packaging'
+on:
+  schedule:
+  - cron: '0 0 * * 0'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update installer script for radare2
+        shell: pwsh
+        run: ./radare2/radare2_git.ps1
+      - name: Run choco pack for radare2
+        shell: pwsh
+        run: |
+          cd radare2
+          choco pack
+      - name: Run choco push for radare2
+        env:
+          CHOCOLATEY_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
+        shell: pwsh
+        run: |
+          cd radare2
+          choco push --key $env:CHOCOLATEY_KEY --source https://push.chocolatey.org/
