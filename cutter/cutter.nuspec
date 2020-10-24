@@ -10,11 +10,11 @@
     <owners>GustavoLCR</owners>
 
     <title>Cutter</title>
-    <authors>radareorg</authors>
+    <authors>radare org</authors>
     <!-- projectUrl is required for the community feed -->
     <projectUrl>https://cutter.re</projectUrl>
-    <iconUrl>http://cdn.rawgit.com/radareorg/cutter/master/src/img/cutter.svg</iconUrl>
-    <copyright>2017-2020 cutter radareorg</copyright>
+    <iconUrl>https://cdn.jsdelivr.net/gh/radareorg/cutter/src/img/cutter.svg</iconUrl>
+    <copyright>2017-2020 cutter radare org</copyright>
     <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <projectSourceUrl>https://github.com/radareorg/cutter</projectSourceUrl>
