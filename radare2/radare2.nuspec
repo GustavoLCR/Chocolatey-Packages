@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>radare2</id>
+    <version>4.5.1</version>
+    <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/radare2</packageSourceUrl>
+    <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
+    <owners>GustavoLCR</owners>
+
+    <title>radare2</title>
+    <authors>radare org</authors>
+    <!-- projectUrl is required for the community feed -->
+    <projectUrl>https://rada.re</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/radareorg/radare.org/img/r2.svg</iconUrl>
+    <copyright>2009-2020 radare2 radare org</copyright>
+    <licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.html</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/radareorg/radare2</projectSourceUrl>
+    <docsUrl>https://book.rada.re/</docsUrl>
+    <bugTrackerUrl>https://github.com/radareorg/radare2/issues</bugTrackerUrl>
+    <tags>radare2 analysis debugger decompiler disassembler forensics security reverse-engineering</tags>
+    <summary>radare2 is a scriptable set of tools and libraries for reverse engineering and forensics.</summary>
+    <description>radare2 is a scriptable set of tools and libraries for reverse engineering and forensics. It can do binary analysis, supporting a plethora of file formats and architectures, file carving, debugging, tracing, etc...</description>
+    <releaseNotes>
+
+Version: 4.5.1  
+Previous: 4.5.0  
+Commits: 20  
+Contributors: 9
+
+## Highlights
+
+**bin**
+
+-   PE
+    -   Fix null dereference in Pe64_bin_pe_compute_authentihash
+-   ELF
+    -   Avoid buffer overflow while identifying imports
+
+**build**
+
+-   Fix Cydia/iOS packaging and compilation issues
+-   Enable LTO in sys/static.sh
+-   Install ldid2 as well, to sign packages for cydia
+-   Use meson install instead of manual installation in meson.py
+
+**core**
+
+-   Add Function Name, Constants, Globals and Local Variables to RAnnotatedCode
+
+**port**
+
+-   Backtrace support for haiku
+
+**util**
+
+-   Add r_sys_now_mono() and use in r2r
+-   Fix NULL dereference in r_pkcs7_parse_spcinfo()
+
+## Authors
+
+-   David CARLIER  [devnexen@gmail.com](mailto:devnexen@gmail.com)
+-   Florian Märkl  [info@florianmaerkl.de](mailto:info@florianmaerkl.de)
+-   Khairul Azhar Kasmiran  [kazarmy@gmail.com](mailto:kazarmy@gmail.com)
+-   NIRMAL MANOJ C  [nimmumanoj@gmail.com](mailto:nimmumanoj@gmail.com)
+-   pancake  [pancake@youterm.com](mailto:pancake@youterm.com)
+-   phakeobj  [53140177+phakeobj@users.noreply.github.com](mailto:53140177+phakeobj@users.noreply.github.com)
+-   Riccardo Schirone  [sirmy15@gmail.com](mailto:sirmy15@gmail.com)
+-   yossizap  [yossizap@gmail.com](mailto:yossizap@gmail.com)
+
+    </releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
