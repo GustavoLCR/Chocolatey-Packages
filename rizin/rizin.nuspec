@@ -4,7 +4,7 @@
   <metadata>
     <id>rizin</id>
     <version>0.1.0</version>
-    <packageSourceUrl>https://www.github.com/GustavoLCR/ChocolateyPackages</packageSourceUrl>
+    <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages</packageSourceUrl>
     <owners>GustavoLCR</owners>
 
     <title>rizin</title>
