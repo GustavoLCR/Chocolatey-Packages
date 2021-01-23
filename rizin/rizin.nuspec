@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>rizin</id>
+    <version>0.1.0</version>
+    <packageSourceUrl>https://www.github.com/GustavoLCR/ChocolateyPackages</packageSourceUrl>
+    <owners>GustavoLCR</owners>
+
+    <title>rizin</title>
+    <authors>Rizin Organization</authors>
+    <projectUrl>https://rizin.re</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/rizinorg/rizin/dev/doc/img/rizin.svg</iconUrl>
+    <copyright>2021 rizin Rizin Organization</copyright>
+    <licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.html</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/rizinorg/rizin</projectSourceUrl>
+    <docsUrl>https://book.rizin.re/</docsUrl>
+    <bugTrackerUrl>https://github.com/rizinorg/rizin/issues</bugTrackerUrl>
+    <tags>rizin debugging security reverse-engineering program-analysis exploitation</tags>
+    <summary>Rizin is a fork of the radare2 reverse engineering framework with a focus on usability, working features and code cleanliness.</summary>
+    <description>
+# Rizin
+
+Rizin is a fork of the radare2 reverse engineering framework with a focus on
+usability, working features and code cleanliness.
+
+Rizin is portable and it can be used to analyze binaries, disassemble code,
+debug programs, as a forensics tool, as a scriptable command-line hexadecimal
+editor able to open disk files, and much more!
+
+To learn more on Rizin you may want to read the
+[official Rizin book](https://book.rizin.re).
+
+# Supported features
+
+## Supported Architectures
+
+i386, x86-64, ARM, MIPS, PowerPC, SPARC, RISC-V, SH, m68k, m680x, AVR,
+XAP, System Z, XCore, CR16, HPPA, ARC, Blackfin, Z80, H8/300, V810,
+V850, CRIS, XAP, PIC, LM32, 8051, 6502, i4004, i8080, Propeller,
+Tricore, CHIP-8, LH5801, T8200, GameBoy, SNES, SPC700, MSP430, Xtensa,
+NIOS II, Java, Dalvik, WebAssembly, MSIL, EBC, TMS320 (c54x, c55x,
+c55+, c66), Hexagon, Brainfuck, Malbolge, whitespace, DCPU16, LANAI,
+MCORE, mcs96, RSP, SuperH-4, VAX, AMD Am29000.
+
+## Supported File Formats
+
+ELF, Mach-O, Fatmach-O, PE, PE+, MZ, COFF, OMF, TE, XBE, BIOS/UEFI,
+Dyldcache, DEX, ART, CGC, Java class, Android boot image, Plan9 executable,
+ZIMG, MBN/SBL bootloader, ELF coredump, MDMP (Windows minidump),
+WASM (WebAssembly binary), Commodore VICE emulator, QNX,
+Game Boy (Advance), Nintendo DS ROMs and Nintendo 3DS FIRMs.
+
+## Scripting
+
+We provide a way to interact with Rizin from Python, Haskell, OCaml,
+Ruby, Rust, and Go languages through [rzpipe](https://github.com/rizinorg/rz-pipe).
+Other languages although not currently supported could be easily added.
+
+# Community
+
+Our website and blog: [https://www.rizin.re/](https://www.rizin.re/)
+
+Join our [Mattermost](https://im.rizin.re) community to discuss Rizin, its
+development, and general topics related to the project.
+
+We also provide the following partial bridges to other messaging platforms:
+- [Telegram](https://t.me/rizinorg)
+- IRC: irc.freenode.net 
+  - Community - [#rizin](https://webchat.freenode.net/?channels=#rizin)
+  - Developers - [#rizindev](https://webchat.freenode.net/?channels=#rizindev)
+
+[CONTRIBUTING.md]: https://github.com/rizinorg/rizin/blob/dev/CONTRIBUTING.md
+[test/README.md]: https://github.com/rizinorg/rizin/blob/dev/test/README.md
+[BUILDING.md]: https://github.com/rizinorg/rizin/blob/dev/BUILDING.md
+[DEVELOPERS.md]: https://github.com/rizinorg/rizin/blob/dev/DEVELOPERS.md
+    </description>
+    <!--<releaseNotes>
+None for now
+    </releaseNotes>-->
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
