@@ -1,23 +1,22 @@
 ﻿$ErrorActionPreference = 'Stop'
 $installDir = $env:ChocolateyPackageFolder
 
-$version = "4.5.1"
+$version = "5.0.0"
 $zipFile = "$installDir\\radare2-win-$version.zip"
-$zipFolder = "radare2-install"
-$url = "https://github.com/radareorg/radare2/releases/download/$version/radare2-windows-static-$version.zip"
-$checksum = "98C68F4B705CE221AEEC5357AC19E594383CDD99D6F0179753BEC1CF44E85C17"
+$url = "https://github.com/radareorg/radare2/releases/download/$version/radare2-windows-$version.zip"
+$checksum = "A595A09C132E58FEBBD339DFD246E09811C45028B6130C552A1CC7C3C977D654"
 
 $packageArgs = @{
-  PackageName    = $env:ChocolateyPackageName
-  unzipLocation  = $installDir
-  softwareName   = 'bin\\r*'
-  url            = $url
-  checksum       = $checksum
-  checksumType   = 'sha256'
+  PackageName   = $env:ChocolateyPackageName
+  unzipLocation = $installDir
+  softwareName  = 'bin\\r*'
+  url           = $url
+  checksum      = $checksum
+  checksumType  = 'sha256'
 }
 
 Install-ChocolateyZipPackage @packageArgs
 
-Install-BinFile -Name r2 -Path "..\lib\radare2\$zipFolder\bin\radare2.exe"
+Install-BinFile -Name r2 -Path "..\lib\radare2\bin\radare2.exe"
 
 Remove-Item -Path $zipFile -ErrorAction SilentlyContinue
