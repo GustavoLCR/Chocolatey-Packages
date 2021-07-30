@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>rizin</id>
-    <version>0.1.0</version>
+    <version>0.2.1</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages</packageSourceUrl>
     <owners>GustavoLCR</owners>
 
@@ -76,9 +76,19 @@ We also provide the following partial bridges to other messaging platforms:
 [BUILDING.md]: https://github.com/rizinorg/rizin/blob/dev/BUILDING.md
 [DEVELOPERS.md]: https://github.com/rizinorg/rizin/blob/dev/DEVELOPERS.md
     </description>
-    <!--<releaseNotes>
-None for now
-    </releaseNotes>-->
+    <releaseNotes>
+* Remove unnecessary exit() calls from librz/
+* Fix wrong demangling of __TIFFSwab16BitData
+* Prevent infinite recursion in DWARF parsing
+* Detect presence of extern char **environ (fixes old MacOS build)
+* Fix SDB and SPP linking with RzUtil
+* Fix RzDiff/RzTest to use subprocess API
+* Fetching all references with rz-pm to support release tags
+* Fix FreeBSD 13 build
+* Fix Gentoo SDB build to use proper Python environment
+* Fix the wrong use of wcstombs()
+* Various UAF, OOB, NULL DEREF fixes
+    </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
