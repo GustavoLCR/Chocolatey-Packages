@@ -1,6 +1,6 @@
 $doDeleteCfg = Read-Host "Do you wish to delete your configuration profile? (Y/n)"
 if (!$doDeleteCfg -or $doDeleteCfg.Contains("y")) {
-	Remove-Item -Path "$env:APPDATA\\RadareOrg\\*cutter*" -Recurse -ErrorAction SilentlyContinue
+	Remove-Item -Path "$env:APPDATA\\RizinOrg\\*cutter*" -Recurse -ErrorAction SilentlyContinue
 }
 
 $shortcutName = "\Cutter.lnk"

@@ -4,62 +4,31 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>1.12.0</version>
+    <version>2.0.2</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
 
     <title>Cutter</title>
-    <authors>radare org</authors>
+    <authors>rizin org</authors>
     <!-- projectUrl is required for the community feed -->
     <projectUrl>https://cutter.re</projectUrl>
-    <iconUrl>https://cdn.jsdelivr.net/gh/radareorg/cutter/src/img/cutter.svg</iconUrl>
-    <copyright>2017-2020 cutter radare org</copyright>
+    <iconUrl>https://cdn.jsdelivr.net/gh/rizinorg/cutter/src/img/cutter.svg</iconUrl>
+    <copyright>2017-2021 cutter rizin org</copyright>
     <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <projectSourceUrl>https://github.com/radareorg/cutter</projectSourceUrl>
+    <projectSourceUrl>https://github.com/rizinorg/cutter</projectSourceUrl>
     <docsUrl>https://cutter.re/docs</docsUrl>
-    <bugTrackerUrl>https://github.com/radareorg/cutter/issues</bugTrackerUrl>
-    <tags>cutter analysis debugger decompiler disassembler forensics security radare2 reverse-engineering</tags>
-    <summary>Cutter is a free and open-source reverse engineering framework powered by radare2.</summary>
-    <description>Cutter is a free and open-source reverse engineering framework powered by radare2. Its goal is making an advanced, customizable and FOSS reverse-engineering platform while keeping the user experience at mind. Cutter is created by reverse engineers for reverse engineers.</description>
+    <bugTrackerUrl>https://github.com/rizinorg/cutter/issues</bugTrackerUrl>
+    <tags>cutter analysis debugger decompiler disassembler forensics security rizin reverse-engineering</tags>
+    <summary>Cutter is a free and open-source reverse engineering framework powered by rizin.</summary>
+    <description>Cutter is a free and open-source reverse engineering platform powered by rizin. It aims at being an advanced and customizable reverse engineering platform while keeping the user experience in mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
-
-# Highlights
-
-## Decompiler
-
-In this release, we introduce major improvements to the Decompiler feature in Cutter. These improvements couldn't be made without the help of our team member and GSoC student  [@NirmalManoj](https://github.com/NirmalManoj)  👏
-
--   Context menu interactions with the decompiler are now context sensitive, only relevant menu items are shown and they applied to the item that was clicked
--   Decompiler based Syntax Highlighting in the Decompiler widget (old highlighting mode can be chosen in appearance options)
--   Support opening multiple Decompiler widgets at the same time. Each of the instances can be set to show different decompiler (Ghidra, RetDec, r2dec, ...) and different functions.
--   Make the current-address synchronization consistent with rest of widgets
-
-**Known Limitations**
-
--   The new features in the Decompiler work best with r2ghidra, not all of them are implemented for r2dec
--   Some hacky features, like instruction patching, that were available in the previous context menu are not available in the new one and might be added in the future.
--   Decompiling large functions using r2ghidra causes UI to freeze temporarily
-
-To read the full list of changes, check our blog post:  [Improving Decompiler Widget - GSoC Project](https://cutter.re/improving-decompiler-widget-gsoc)
-
-## Radare2
-
--   Cutter 1.12.0 depends on radare2 4.5.1
-
-## Other
-
--   Support analysis after opening the file
--   Configurable analysis options from the Preferences widget
-
-Full list of commits since previous release available here:  [v1.11.0...v1.12.0](https://github.com/radareorg/cutter/compare/v1.11.0...v1.12.0)
-
-# Thanks
-
-The success of this release couldn't be achieved without the help and time dedicated by many contributors which are new to the Cutter family. We appreciate the work and honored to welcome our new contributors:  [@Surendrajat](https://github.com/Surendrajat),  [@ocastejon](https://github.com/ocastejon),  [@sagcan](https://github.com/sagcan),  [@DX-MON](https://github.com/DX-MON),  [@kohnakagawa](https://github.com/kohnakagawa),  [@7h3qu1rkyb1t](https://github.com/7h3qu1rkyb1t),  [@DeleteXso](https://github.com/DeleteXso),  [@polaris](https://github.com/polaris)
-
-</releaseNotes>
+## Bug Fixes
+* Rizin updated to 0.2.1
+* Fix incorrect packaging causing "Most likely, Rizin is not properly installed." on Windows
+* Crash on Linux distros using Qt 5.15.2 with KDE patches #2662
+    </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
