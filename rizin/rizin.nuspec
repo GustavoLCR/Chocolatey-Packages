@@ -10,7 +10,7 @@
     <title>rizin</title>
     <authors>Rizin Organization</authors>
     <projectUrl>https://rizin.re</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/rizinorg/rizin/dev/doc/img/rizin.svg</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/rizinorg/rizin/doc/img/rizin.svg</iconUrl>
     <copyright>2021 rizin Rizin Organization</copyright>
     <licenseUrl>https://www.gnu.org/licenses/lgpl-3.0.html</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
