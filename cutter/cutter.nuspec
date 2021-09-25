@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutter</id>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/cutter</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -24,10 +24,29 @@
     <summary>Cutter is a free and open-source reverse engineering framework powered by rizin.</summary>
     <description>Cutter is a free and open-source reverse engineering platform powered by rizin. It aims at being an advanced and customizable reverse engineering platform while keeping the user experience in mind. Cutter is created by reverse engineers for reverse engineers.</description>
     <releaseNotes>
-## Bug Fixes
-* Rizin updated to 0.2.1
-* Fix incorrect packaging causing "Most likely, Rizin is not properly installed." on Windows
-* Crash on Linux distros using Qt 5.15.2 with KDE patches #2662
+Along with many bugfixes and updates to make best use of Rizin 0.3.0, this release also brings a brand new heap viewer widget for glibc, developed as part of Google Summer of Code by  [@PulakIIIT](https://github.com/PulakIIIT):  [https://rizin.re/posts/gsoc-2021-summary/#pulak-heap-viewer-for-cutter](https://rizin.re/posts/gsoc-2021-summary/#pulak-heap-viewer-for-cutter)
+
+### Additions and Changes
+
+-   Debug: Heap viewer widget for glibc
+-   Rizin, rz-ghidra and jsdec updated to 0.3.0 with changes for compatibility.
+-   Various improvements for native macOS UI ([#2776](https://github.com/rizinorg/cutter/pull/2776))
+-   Many internal changes switching from error-prone rizin commands to C API
+-   CI and Linux builds: use Ubuntu 18.04 as oldest supported build system ([#2736](https://github.com/rizinorg/cutter/pull/2736))
+
+### Bugfixes
+
+-   Fix Decompiler Copy Shortcut (Fix  [#2773](https://github.com/rizinorg/cutter/issues/2773),  [#2778](https://github.com/rizinorg/cutter/pull/2778))
+-   Fix Restoring "Show Disassembly as" in Preferences (Fix  [#2726](https://github.com/rizinorg/cutter/issues/2726),  [#2748](https://github.com/rizinorg/cutter/pull/2748))
+-   Complete Color Theme Lists (Fix  [#2672](https://github.com/rizinorg/cutter/issues/2672)) ([#2752](https://github.com/rizinorg/cutter/pull/2752))
+-   macOS: Fix Versions in Info.plist (Fix  [#2679](https://github.com/rizinorg/cutter/issues/2679)) ([#2740](https://github.com/rizinorg/cutter/pull/2740))
+-   Debug: Fix continue until main not being enabled in certain cases ([#2727](https://github.com/rizinorg/cutter/pull/2727))
+-   Debug: Fix attaching to a process with no file opened ([#2727](https://github.com/rizinorg/cutter/pull/2727))
+-   Fix a crash when printing disassembly arrows ([#2688](https://github.com/rizinorg/cutter/pull/2688))
+
+### Removals
+
+-   Type Link features removed due to unreliability, in light of global variables coming soon ([#2775](https://github.com/rizinorg/cutter/pull/2775))
     </releaseNotes>
   </metadata>
   <files>
