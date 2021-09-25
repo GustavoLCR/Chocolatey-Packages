@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>radare2</id>
-    <version>5.0.0</version>
+    <version>5.4.2</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages/tree/master/radare2</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons.-->
     <owners>GustavoLCR</owners>
@@ -22,154 +22,190 @@
     <bugTrackerUrl>https://github.com/radareorg/radare2/issues</bugTrackerUrl>
     <tags>radare2 analysis debugger decompiler disassembler forensics security reverse-engineering</tags>
     <summary>radare2 is a scriptable set of tools and libraries for reverse engineering and forensics.</summary>
-    <description>radare2 is a scriptable set of tools and libraries for reverse engineering and forensics. It can do binary analysis, supporting a plethora of file formats and architectures, file carving, debugging, tracing, etc...</description>
+    <description>
+## Radare2: Unix-Like Reverse Engineering Framework
+
+Next release will be 5.5.0, current git is 5.4.3 and the [![latest packaged version(s)](https://repology.org/badge/latest-versions/radare2.svg)](https://repology.org/project/radare2/versions) See the [Release](https://github.com/radareorg/radare2/releases) downloads page.
+
+r2 is a rewrite from scratch of radare. It provies a set of libraries, tools and
+plugins to ease reverse engineering tasks.
+
+The radare project started as a simple command-line hexadecimal editor focused on
+forensics, over time more features were added to support a scriptable command-line
+low level tool to edit from local hard drives, kernel memory, programs, remote gdb
+servers and be able to analyze, emulate, debug, modify and disassemble any binary.
+
+* Install r2 from **Git** (Clone the repo and run `sys/install.sh`) or use `pip install r2env`
+* Read the [Official radare2 book](https://book.rada.re)
+* [COMMUNITY.md](COMMUNITY.md) engagement
+* [CONTRIBUTING.md](CONTRIBUTING.md) general rules
+* [DEVELOPERS.md](DEVELOPERS.md) to improve r2 for your needs
+* [SECURITY.md](SECURITY.md) on vulnerability report instructions
+* [USAGE.md](USAGE.md) for an introductory session
+* [INSTALL.md](INSTALL.md) instructions
+
+```
+git clone https://github.com/radareorg/radare2
+radare2/sys/install.sh
+```
+
+# Plugins
+
+Most of the plugins you need may be available in the stock r2 installation,
+but you can find more in the [r2pm](https://github.com/radareorg/radare2-pm) package manager.
+
+```
+r2pm update          # initialize and update the package database
+r2pm install [pkg]   # installs the package
+```
+
+Some of the most installed packages are:
+
+* [r2ghidra](https://github.com/radareorg/r2ghidra) the native ghidra decompiler plugin: `pdg` command
+* [esilsolve](https://github.com/radareorg/esilsolve) symbolic execution r2 plugin based on esil and z3
+* [r2dec](https://github.com/wargio/r2dec-js) decompiler based on r2 written in js `pdd`
+* [r2frida](https://github.com/nowsecure/r2frida) the frida io plugin `r2 frida://0`
+* [iaito](https://github.com/radareorg/iaito) - official graphical interface (Qt)
+
+## Operating Systems
+
+Windows (since XP), Linux, Darwin, GNU/Hurd, Apple's {Mac,i,iPad,watch}OS, Android
+[Dragonfly, Net, Free, Open] BSD, Z/OS, QNX, SerenityOS, Solaris, Haiku, Vinix, FirefoxOS.
+
+## Architectures
+
+i386, x86-64, ARM, MIPS, PowerPC, SPARC, RISC-V, SH, m68k, m680x, AVR,
+XAP, S390, XCore, CR16, HPPA, ARC, Blackfin, Z80, H8/300, V810,
+V850, CRIS, XAP, PIC, LM32, 8051, 6502, i4004, i8080, Propeller,
+Tricore, CHIP-8, LH5801, T8200, GameBoy, SNES, SPC700, MSP430, Xtensa,
+NIOS II, Java, Dalvik, WebAssembly, MSIL, EBC, TMS320 (c54x, c55x,
+c55+, c66), Hexagon, Brainfuck, Malbolge, whitespace, DCPU16, LANAI,
+MCORE, mcs96, RSP, SuperH-4, VAX, AMD Am29000.
+
+## File Formats
+
+ELF, Mach-O, Fatmach-O, PE, PE+, MZ, COFF, OMF, TE, XBE, BIOS/UEFI,
+Dyldcache, DEX, ART, CGC, Java class, Android boot image, Plan9 executable,
+ZIMG, MBN/SBL bootloader, ELF coredump, MDMP (Windows minidump),
+WASM (WebAssembly binary), Commodore VICE emulator, QNX, WAD, OFF, TIC-80
+Game Boy (Advance), Nintendo DS ROMs and Nintendo 3DS FIRMs, various filesystems.
+
+# Contributing
+
+There are many ways to contribute to the project, join the IRC/Matrix/Telegram
+channels, check out the github issues or grep for the TODO comments in the source.
+To contribute with code, create a branch in your forked repository and push
+a pull request, follow the coding style and ensure it passes the tests with
+the `r2r` tool to run the tests that are under the `tests/` subdirectory.
+
+For more details read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+## Community and Documentation
+
+To learn more about r2 we encourage you to watch youtube talks from
+[r2con](https://www.youtube.com/c/r2con) [conference](https://rada.re/con). As well as reading blogposts,
+slides or read the [Official radare2 book](https://book.rada.re), You can reach us in the following chats:
+
+* irc.libera.chat `#radare` `#radare_side`
+* [Matrix](https://matrix.org/) `#radare:matrix.org`
+* [Telegram](https://t.me/radare) and the [Side Channel](https://t.me/radare_side)
+* [Discord](https://discord.gg/MgEdxrMnqx) server
+* Twitter: [@radareorg](https://twitter.com/radareorg)
+* Website: [https://www.radare.org/](https://www.radare.org/)
+
+## Packaging Status
+
+* [![Termux package](https://repology.org/badge/version-for-repo/termux/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Alpine Linux Edge package](https://repology.org/badge/version-for-repo/alpine_edge/radare2.svg)](https://repology.org/project/radare2/versions) [![Alpine Linux 3.13 package](https://repology.org/badge/version-for-repo/alpine_3_13/radare2.svg)](https://repology.org/project/radare2/versions) [![Alpine Linux 3.12 package](https://repology.org/badge/version-for-repo/alpine_3_12/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Arch package](https://repology.org/badge/version-for-repo/arch/radare2.svg)](https://repology.org/project/radare2/versions) [![AUR package](https://repology.org/badge/version-for-repo/aur/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Fedora 34 package](https://repology.org/badge/version-for-repo/fedora_34/radare2.svg)](https://repology.org/project/radare2/versions) [![Fedora 32 package](https://repology.org/badge/version-for-repo/fedora_32/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![FreeBSD port](https://repology.org/badge/version-for-repo/freebsd/radare2.svg)](https://repology.org/project/radare2/versions) [![OpenBSD port](https://repology.org/badge/version-for-repo/openbsd/radare2.svg)](https://repology.org/project/radare2/versions) [![pkgsrc current package](https://repology.org/badge/version-for-repo/pkgsrc_current/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Homebrew package](https://repology.org/badge/version-for-repo/homebrew/radare2.svg)](https://repology.org/project/radare2/versions) [![MacPorts package](https://repology.org/badge/version-for-repo/macports/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![HaikuPorts master package](https://repology.org/badge/version-for-repo/haikuports_master/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Ubuntu 20.10 package](https://repology.org/badge/version-for-repo/ubuntu_20_10/radare2.svg)](https://repology.org/project/radare2/versions) [![Ubuntu 20.04 package](https://repology.org/badge/version-for-repo/ubuntu_20_04/radare2.svg)](https://repology.org/project/radare2/versions) [![Ubuntu 18.04 package](https://repology.org/badge/version-for-repo/ubuntu_18_04/radare2.svg)](https://repology.org/project/radare2/versions)
+* [![Debian Unstable package](https://repology.org/badge/version-for-repo/debian_unstable/radare2.svg)](https://repology.org/project/radare2/versions) [![Raspbian Stable package](https://repology.org/badge/version-for-repo/raspbian_stable/radare2.svg)](https://repology.org/project/radare2/versions) [![Kali Linux Rolling package](https://repology.org/badge/version-for-repo/kali_rolling/radare2.svg)](https://repology.org/project/radare2/versions)
+    </description>
     <releaseNotes>
 
-# r2-5.0
+## CI / build and portability
 
-Commits: 510  
-Contributors: 65
+-   Added macos-arm64 (M1) builds into the CI
+-   Add configuration file for Vinix builds
+-   Improve the CI to keep consistent directory names in dist zips
 
-## Interface
+## Windows related fixes
 
--   Added the Comma API
--   Added r_str_wrap() and r_cons_printat() APIs
--   Fix adding comments in panels
--   Improved help messages
--   Removed problematic fortunes
--   Add ?et command to change terminal title
--   Fix double-click issue in vte terminals
--   Formalize the flag names and its filtering APIs
--   Fix return code when using q!. Fixes r2pipe.go
--   Add experimental asm.flags.real to get strings from bin.str.real
--   Removed unmaintained enyo and panels webuis (-2MB)
--   Set realname on all bin strings for better asm.flags.real when bin.str.real is set
--   Fix ansi colors embedded inside json output formatting
--   Improve socket and http server APIs
--   Add opn/opr/opp commands to rotate between opened files
--   Initial implementation of scr.cursor for keyboard accessibility in visual and panels
--   Add asm.hint.call.indirect to make indirect calls follow the target address ([#17968](https://github.com/radareorg/radare2/pull/17968))
-
-## Performance
-
--   Use sdb_set instead of sdb_querys (aaaa is 7x faster)
--   Optimize IO.cache (makes bins with relocs much faster)
+-   Fix w32 and w64 builds by not statically linking the runtime
+-   Dynamically load more vista-related APIs to fix w32 startup crash
+-   Support VS2019Pro, not only the Community toolchain in preconfigre.bat
+-   Arrow keys working again in the prompt
+-   Fix crash in  `dd`  command in debugger mode
 
 ## Signatures
 
-## Debugger
+kudos to  [@swoops](https://github.com/swoops)  for those awesome improvements
 
--   Sync anal and debug tracing information
--   Fix a crash in dts+ command with empty register arenas
--   Attach to target pid/tid on remote lldb connect
--   Add a warning when a breakpoint is placed in an invalid map
--   Add commands to parse mangling pointers glibc heap
+-   Add support for collision calculations, improving speed in matches
+-   rasign2 is now able to generate signatures for archive files (.a)
+-   Load signatures from sdb file
+-   Implemented 'next' signature types to detect functions based in context
 
-## Analysis
+## Esil
 
--   Improve signature matching, threshold, refactor and optimize related code
-    
--   Directly apply Callee Args in Type Matching
-    
--   Takeover variables when splitting functions
-    
--   Always register the derived CC from the reg profile
-    
--   Add bbhash to detect modifications in functions (and reanalize if patched)
-    
--   Implement basic block listing commands (abl*)
-    
--   Implement tcc-* commmand to unload all calling conventions
-    
--   X86
-    
-    -   Add amd64syscall and anal.cc evar
-    -   Fix esil for cmp/sub instructions
-    -   Add amd64syscall calling convention
-    -   Fix ELF R_X86_64_PLT32 relocation entries patching ([#17587](https://github.com/radareorg/radare2/pull/17587))
-    -   Fix x86 CMC instruction
--   MIPS
-    
-    -   Improves mips.gnu esil
-    -   Add JALR JR when the address can be computed
-    -   Fix GP calculation when there are multiple entries
-    -   Fix MIPS C-TYPE instruction check
-    -   Set asm.cpu for mips.gnu derived from the ISA defined in the ELF
--   ARM
-    
-    -   arm mte addg/subg decoding
-    -   fix arm it block analysis
-    -   BLR arm64 is type=RCALL (before it was UCALL)
-    -   ARM64 assembler can now assemble AND and BIC instructions (Thanks  [@mrmacete](https://github.com/mrmacete)!)
-    -   Add initial support for arm and arm64 ELF relocs
-    -   Handle RELATIVE (todo) and IRELATIVE relocs in ARM64 ELFs
-    -   COFF: add ARMNT and ARM64 support
-    -   All testsuite run on arm32 and arm64
--   v850
-    
-    -   Improve invalid instruction detection
-    -   Implement the pseudo disassembler plugin
-    -   Fallback to anal=v850 when using asm=v850.gnu
-    -   Add ep, sp, gp lp register aliases for v850
-    -   Added function preludes (aap finds much more functions)
-    -   Fix calling convention argument register usage for v850
-    -   Add all instruction descriptions
-    -   Set v850 disassembler when opening v800 ELF files
--   TMS320
-    
-    -   Implement pseudo disassembler plugin
--   PowerPC
-    
-    -   Initial assembler support
-    -   Improve reg profile to support calling conventions
--   RISC-V
-    
-    -   Add all instruction descriptions
-    -   Add Fix shift instruction analysis
-    -   Fix ESIL for JALR and AUIPC instruction
--   SPC700 plugins moved to extras
-    
+-   Fix emulation of xchg rax, rax
+-   Fix 16 bit pop/push sizes
+-   Add  `aoeq`  command with just the esil expression
+-   Correct FPU and SIMD register types
 
-## ESIL
+## Shell
 
--   Add sign-extension operations
--   Implement aof to filter expressions using the dfg api
--   Fix unexpected FPU exception in ESIL emulation bug
--   Enlarge ESIL VM stack from 32 to 256
+-   `ls`  output is now alphabetically sorted
+-   Add 'woi' command to inverse the contents of the block
+-   Add isotp:// io plugin to let r2 talk to your car.
+-   Autocomplete options in  `asm.assembler`
+-   Cleanup and fix some uaf bugs in @@@ actions
+-   Fix glitch when moving cursor when scr.color=0
+-   The o and mg commands now accepts base64: argument
+-   Add s. and s.? commands to reload current block (same as s $$)
+-   Fix /ai search for arm64 movs instructions
+-   Handle ^C in @@ and @@@ as well as in macros
+-   Support fish and tcsh
 
-## BSD
+## Disasm and Analysis
 
--   Support pkgconf (BSD alternative to pkg-config)
--   Fix build with tinycc, unfortunely the final binary segfaults
--   Fix debugger support in FreeBSD
--   Implements r_sys_aslr for NetBSD
--   Fixing r_sys_pid_to_path for DragonFlyBSD
--   Setting ASLR support for DragonFlyBSD
+Kudos to  [@Lazula](https://github.com/Lazula)  for properly analyzing and fixing the 15yo disasm bug! great job!
 
-## Windows
+-   Fix a 15 year old bug that was causing invalid disassembly when doing large listings
+-   Add anal.cs variable to better support segmented memory addressing
+-   Detect inlined strings in immediates using the movabs instruction under some circunstancies
+-   Improve x86.nz assembler for better handling register/argument size
 
--   Fix r_core_editor() on Windows ([#17887](https://github.com/radareorg/radare2/pull/17887))
--   Fix MSVC template demangling symbols
--   Expose TEB address as a flag on Windows
--   Add network support to WinDbg/KD (KDNET)
+## RBin
 
-## Apple
+-   Fix loading PE binaries with tiny segments (like 1 byte in size)
+-   Projects containing PE binaries don't break after reopening now
+-   Add support for COFF files for ARM
 
--   Support ObjC small method lists
--   Support iOS 14.x dyld shared cache
--   Add support for new macOS kernelcache
+## Projects
 
-## Changes
+-   Add more tests, ensure projects exists
+-   Ravc2 - added rimraf, and reset action
 
--   Rename  `asm.filter`  to  `asm.sub.names`
--   Rename  `asm.var.sub`  to  `asm.sub.var`
--   Deprecate the  `afc=`  command.
--   Removed all globals from main functions
--   afc= -> e anal.cc
--   Fix big endian DWARF parsing
--   labels no longer stored in sdb
--   Refactor Variable Constraints out of SDB
--   Fix r_anal_block_automerge incorrectly merging blocks
+## Scripting
+
+-   Fix flagspace issue spotted when using it via r2pipe and ccall://
+-   Add REXX scripting support
+-   Fix loading r2ghidra when using r2 via r2pipe (RTLD issue only for Linux)
+-   Previously the whole configuration was serialized to disk on every command, this is now gone
+
+## Security
+
+-   Fix some null derefs found in RCons, RConsGrep
+-   Oob read in macho parser
+-   Fix crash caused when io.cache was set
+-   Support non-PIE builds (required for Vinix)
+-   Support any value in http.webui fixing for the new wip webui
+-   Add rmrf command for recursively removing directories
 
     </releaseNotes>
   </metadata>

@@ -1,22 +1,35 @@
 ﻿$ErrorActionPreference = 'Stop'
 $installDir = $env:ChocolateyPackageFolder
 
-$version = "5.0.0"
-$zipFile = "$installDir\\radare2-win-$version.zip"
-$url = "https://github.com/radareorg/radare2/releases/download/$version/radare2-windows-$version.zip"
-$checksum = "A595A09C132E58FEBBD339DFD246E09811C45028B6130C552A1CC7C3C977D654"
+$version = "5.4.2"
+$packageName32 = "radare2-$version-w32"
+$packageName64 = "radare2-$version-w64"
+$zipFile32 = "$installDir\\$packageName32.zip"
+$zipFile64 = "$installDir\\$packageName64.zip"
+$url32 = "https://github.com/radareorg/radare2/releases/download/$version/$packageName32.zip"
+$url64 = "https://github.com/radareorg/radare2/releases/download/$version/$packageName64.zip"
+$checksum32 = "2C79342EC28B695BD60813E4FFFC8E1AFC142DE17C172C4C1255E376B83AFD36"
+$checksum64 = "303811F388B81138C615D1AF4837F2A8A715B66939DA211DE186386986C4C5AD"
 
 $packageArgs = @{
-  PackageName   = $env:ChocolateyPackageName
-  unzipLocation = $installDir
-  softwareName  = 'bin\\r*'
-  url           = $url
-  checksum      = $checksum
-  checksumType  = 'sha256'
+  PackageName    = $env:ChocolateyPackageName
+  unzipLocation  = $installDir
+  softwareName   = 'r*'
+  url            = $url32
+  checksum       = $checksum32
+  checksumType   = 'sha256'
+  url64bit       = $url64
+  checksum64     = $checksum64
+  checksumType64 = 'sha256'
 }
 
 Install-ChocolateyZipPackage @packageArgs
 
-Install-BinFile -Name r2 -Path "..\lib\radare2\bin\radare2.exe"
-
-Remove-Item -Path $zipFile -ErrorAction SilentlyContinue
+if ([Environment]::Is64BitOperatingSystem) {
+  Install-BinFile -Name r2 -Path "$installDir\\$packageName64\\bin\\radare2.exe"
+  Remove-Item -Path $zipFile64 -ErrorAction SilentlyContinue
+}
+else {
+  Install-BinFile -Name r2 -Path "$installDir\\$packageName32\\bin\\radare2.exe"
+  Remove-Item -Path $zipFile32 -ErrorAction SilentlyContinue
+}
