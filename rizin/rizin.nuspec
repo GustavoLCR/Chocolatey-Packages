@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>rizin</id>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages</packageSourceUrl>
     <owners>GustavoLCR</owners>
 
@@ -77,17 +77,53 @@ We also provide the following partial bridges to other messaging platforms:
 [DEVELOPERS.md]: https://github.com/rizinorg/rizin/blob/dev/DEVELOPERS.md
     </description>
     <releaseNotes>
-* Remove unnecessary exit() calls from librz/
-* Fix wrong demangling of __TIFFSwab16BitData
-* Prevent infinite recursion in DWARF parsing
-* Detect presence of extern char **environ (fixes old MacOS build)
-* Fix SDB and SPP linking with RzUtil
-* Fix RzDiff/RzTest to use subprocess API
-* Fetching all references with rz-pm to support release tags
-* Fix FreeBSD 13 build
-* Fix Gentoo SDB build to use proper Python environment
-* Fix the wrong use of wcstombs()
-* Various UAF, OOB, NULL DEREF fixes
+# Rizin v0.3.0
+
+A new release of Rizin is here, v0.3.0! This release has taken a bit longer than expected, but a lot of things have been done since the last release, including our first GSoC in the Rizin project. Look at our  [blogpost](https://rizin.re/posts/gsoc-2021-summary/)  to know more about GSoC 2021.
+
+Below we would like to give you a glimpse at what we did, but be aware this is only a small fraction of the changes. You should look at our git history to see everything. Some of our work directly improves our users' experience, while others is more under the hood work, though we are sure it ultimately improves the experience of using and developing Rizin as well.
+
+Keep reading for some highlights of this new release.
+
+## New
+
+-   **New RzType module:**  We moved all the types related functions from the RzAnalysis module to a new separate module: RzType. Instead of using a custom stripped-down version of the TinyCC, RzType parses C code by using a grammar defined with Tree-Sitter. RzType parser and loader now better validates types, which allowed us to fix several mistakes in the shipped type libraries for Linux, MacOS, and Windows. When a type is unknown or it is a typedef/atomic type without an underlying specification you may also find the special new type  `unknown_t`  which is an integer of the current file/platform word size. This new module allows us to better use types in several places of Rizin, Cutter and rz-ghidra!
+-   **SPDX headers:**  All files have been marked with SPDX headers that will help you and us check what kind of code we ship, which licenses, copyrights, etc.. Checks are in place in CI to ensure that all files will have SPDX headers going forward.  
+    [![image4](https://user-images.githubusercontent.com/562321/134696142-d9f10db4-5450-4ecb-8bca-9e505b5c320a.png)](https://user-images.githubusercontent.com/562321/134696142-d9f10db4-5450-4ecb-8bca-9e505b5c320a.png)
+-   **rz-diff hexadecimal view:**  We rewrote big parts of rz-diff tool to remove the dependency on the  `diff`/`git diff`  binary, optimize diffing functions and provide a new hexadecimal diffing view through the new  `-H`  option.  
+    [![image2](https://user-images.githubusercontent.com/562321/134696179-a58da897-5596-4cf0-909d-29c076cadb16.png)](https://user-images.githubusercontent.com/562321/134696179-a58da897-5596-4cf0-909d-29c076cadb16.png)
+-   **Shell new behavior:**  Rizin can now be started without any argument and it won't open any file, allowing you to later open a binary with  `o`  command as usual. We switched the behavior of  `-`  and  `=`  when starting Rizin, to better match what Linux users expect from a tool:  `-`  now reads the binary from stdin, while  `=`  now opens a malloc-ed file in memory. Try things with  `rizin`  and  `rizin =`.
+-   **Global variables:**  So far you could only define variables local to a function (see  `afv`  commands), but we are now introducing global variables that can be defined at any fixed address with a given type. See  `avg?`  to see how to handle them. This is still a very early concept, but we plan to use them more and more for disassembly printing, analysis, in Cutter, and in rz-ghidra. They are going to replace the “type link” function you may know under the  `tl`  commands.
+
+## Improvements
+
+-   **ELF parsing:**  Code for ELF parsing has been heavily refactored and adjusted to make better use of dynamic info provided in segments instead of relying on untrusted sections. Few new variables have been introduced to alter how ELF files should be parsed and validated, see  `elf`  vars with  `el elf`. Support for DT_HASH and DT_GNU_HASH allows to determine more accurately the number of symbols in the dynamic symbol table. As one of the results of this work, a known anti-analysis technique that tries to hide used symbols is now defeated by Rizin.  
+    [![image5](https://user-images.githubusercontent.com/562321/134696222-b7f577ed-94e6-4625-83f9-ca5a0eec43f8.png)](https://user-images.githubusercontent.com/562321/134696222-b7f577ed-94e6-4625-83f9-ca5a0eec43f8.png)  
+    [![image1](https://user-images.githubusercontent.com/562321/134696285-0c5b16f7-820e-4312-a6d9-4d826886bb46.png)](https://user-images.githubusercontent.com/562321/134696285-0c5b16f7-820e-4312-a6d9-4d826886bb46.png)
+-   **No more io.cache required to apply relocations:**  It was common in Rizin to get warning messages telling you to enable  `io.cache`  to fix binary relocations. We think that was unnecessary and wrong in concept as well. With this new release, the most relevant binary plugins were refactored to provide a list of mappings together with changes that should be applied on top, making relocations patching very easy and transparent for the end user. You will not have to set any particular variable nor will you see changes applied by Rizin itself mixed with changes you, as a user, did to the binary.  
+    [![image3](https://user-images.githubusercontent.com/562321/134696336-9cf932a2-456c-410f-aabd-cb7ad26bd348.png)](https://user-images.githubusercontent.com/562321/134696336-9cf932a2-456c-410f-aabd-cb7ad26bd348.png)
+-   **Commands ported to Rizin shell:**  Several commands were ported to Rizin unified shell, making them more consistent and easy to use. These commands have an automatically generated help, their arguments can be wrapped in quotes like you do in bash and they integrate better with Rizin. Some of those commands are:  `afvxa`,  `afvxv`,  `dts`,  `L`,  `pg`,  `dmh`,  `dm`,  `pt`,  `dc`,  `H`,  `av`,  `ph`,  `avg`,  `i`,  `!`.
+-   **Project migration:**  With the first release of Rizin we mentioned our new project implementation which would allow our users to keep using older projects as they update their Rizin tools. Even though we are not at release 1.0.0 we already implemented project migrations that automatically update your old projects as you load them! Please report any issue you find with this, so that by the release 1.0.0 we can deliver something as stable as possible!
+-   **Support for multidex APK files:**  Initial work to support multidex APK
+-   **rz-hash:**  Code related to  `rz-hash`  was heavily refactored and it now supports loading of large files as well as HMAC combined with any hash algorithm.
+
+## Fixes
+
+-   **Fix debugger in static build:**  The statically compiled rizin binary provided with last release was not able to debug other binaries, due to it being compiled on Alpine and the code using the ptrace API with the wrong types of arguments.
+    
+-   **FLIRT decompression:**  Did you know you could load IDA FLIRT signatures files in Rizin with the  `zf`  commands? Now we support z-lib compressed FLIRT signatures as well, so try to load your FLIRT database with Rizin.
+    
+-   **DEX parsing:**  Several bug fixes ranging from correctly listing symbols in a dex file, to better printing of methods and fields names, to resolution of invoke-virtual methods.  
+    [![image6](https://user-images.githubusercontent.com/562321/134696429-02651bed-e413-425f-a122-bc0d2b313874.png)](https://user-images.githubusercontent.com/562321/134696429-02651bed-e413-425f-a122-bc0d2b313874.png)
+    
+-   **Ports:**  Added CI jobs for NetBSD and Linux PowerPC - all tests pass, various fixes for HaikuOS, DragonFlyBSD.
+    
+
+There is more in this release and even more to come in the upcoming ones, like a new Intermediate Language, RzIL, that will replace ESIL, improved usage of PDB files, global variables refinement and yet other improvements on ELF parsing. If you wish to help us develop, test, document Rizin or you are just curious about it, look at our website  [https://rizin.re/community/](https://rizin.re/community/)  to know how to reach out to us!
+
+Enjoy Rizin v0.3.0,
+
+The Rizin team
     </releaseNotes>
   </metadata>
   <files>
