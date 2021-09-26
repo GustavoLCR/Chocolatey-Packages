@@ -25,7 +25,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
-if ([Environment]::Is64BitOperatingSystem) {
+if ([Environment]::Is64BitOperatingSystem -and -not $env:chocolateyForceX86) {
   Install-BinFile -Name r2 -Path "$installDir\\$packageName64\\bin\\radare2.exe"
   Remove-Item -Path $zipFile64 -ErrorAction SilentlyContinue
 }
