@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>rizin</id>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages</packageSourceUrl>
     <owners>GustavoLCR</owners>
 
@@ -78,244 +78,61 @@ We also provide the following partial bridges to other messaging platforms:
     </description>
     <releaseNotes>
 
-Here we are again with a new release of Rizin, v0.4.0. We are still in the v0.y.z realm, but we are getting closer and closer to what we can consider our first stable release v1.0.0, with fully working projects and a uniform shell experience. In the meantime, we are moving forward with several side projects that we hope you will enjoy and that will help your reverse engineering experience, like automatic signature detection, FLIRT signatures creation, firmware base address computation, a new Intermediate Language (RzIL) and more.
+This release contains a few important security fixes:
 
-As usual, keep reading for more insights and let us know of any bugs you find or improvements you would like to see in future versions.
+-   [CVE-2022-36043](https://github.com/rizinorg/rizin/security/advisories/GHSA-rjhv-mj4g-j4p5)
+-   [CVE-2022-36040](https://github.com/rizinorg/rizin/security/advisories/GHSA-h897-rhm9-rpmw)
+-   [CVE-2022-36041](https://github.com/rizinorg/rizin/security/advisories/GHSA-2c7m-2f37-mr5m)
+-   [CVE-2022-36039](https://github.com/rizinorg/rizin/security/advisories/GHSA-pr85-hv85-45pg)
+-   [CVE-2022-36044](https://github.com/rizinorg/rizin/security/advisories/GHSA-mqcj-82c6-gh5q)
+-   [CVE-2022-36042](https://github.com/rizinorg/rizin/security/advisories/GHSA-pf72-jg54-8gvp)
 
-# New
+Apart from those, were fixed:
 
--   FLIRT files can be used to apply analysis information gathered from one binary to another one, allowing the reverse engineer to more easily recognize library functions or standard functions that are usually not binary specific. Rizin can now create such FLIRT files (both in  `.pat`  and  `.sig`  extensions), which can be later applied to other Rizin sessions or even opened directly by IDA.
+-   Various minor packaging and installation issues and improvements
+-   Various minor fixes on big-endian platforms
+-   GCC 12 compilation warnings.
+-   Update libzip to v1.9.2
+-   Update rz-libdemangle
+-   Fix  - wrong AVR analysis jump value for rjmp/rcall
+-   Fix the crash of command  `fg`
+-   Fix  `pg`  with fewer than 5 arguments
+-   Fix  `afx`  command JSON output
+-   Print graph when dmhg is executed
+-   Fix the heap overflow in TUI
+-   Fix for file sharing permission on Windows
+-   Fix  - oob read in pe_section.c
+-   Fix  - oob read in pe/pe.c and bin/golang.c
+-   Fix  - oob read in coresymbolication.c and in bin_dyldcache.c
+-   Fix  - oob read in ne.c
+-   Fix  - null deref dwarf_process.c
+-   Fix  - null deref in mdmp.c
+-   Fix  - null deref and div by zero in mach0_rebase.c
+-   Fix  - oob read in bin.c
+-   Fix  - oob read in coresymbolication.c
+-   Fix  - oob read in dwarf.c
+-   Fix  - oob read in dex.c
+-   Fix  - oob read in dex.c
+-   Fix  - oob read in magic/funcs.c
+-   Fix  - null deref in dyldcache.c
+-   Fix  - Check rz_buf_read_le32_offset return status parsing LE bins
+-   Fix integer overflow in mach0
+-   Fix oob read on luac
+-   Fix RzBitmap length type and added ownership and checks.
+-   Fix strdup on nullptr in rz_core_bin_apply_strings
+-   Fix oob read on _luac_build_info and luac memleaks
+-   Fix oob read on rz_pkcs7_parse_spcdata
+-   Fix oob read on rz_x509_parse_tbscertificate
+-   Fix oob read and endian dependency in asm_ebc
+-   Fix OOB read in 6502 analysis plugin.
+-   Fix reset followed by color change in rz_cons_html_filter
+-   Fix always true if due wrong check in search
+-   Fix the failure of switching panel command
+-   Fix double free of enum member name
+-   core_search_for_xrefs_in_boundaries omits the negative return value
+-   Fix the crash caused by get_long_object()
 
-```
-$ rizin -A -qc "zfc /tmp/curl.sig" curl-example-dbg
-704 FLIRT signatures were written in '/tmp/curl.sig'
-$ rz-sign -aa -o /tmp/curl.pat curl-example-dbg
-rz-sign: written 704 signatures to /tmp/curl.pat.
-
-```
-
--   Signature files (e.g.  `.sig`) can be placed in the installation prefix to form a library that Rizin automatically uses while analyzing a binary, in order to find known functions and ease the reversing process.
-
-```
-$ rizin -A curl-example
-[x] Applied 5 FLIRT signatures via sigdb
-
-```
-
--   Automatic golang function and string recovery for x86/x64/PowerPC/MIPS/ARM/RISC-V.
-
-```
-$ rizin -A example-go-1.18-stripped
-[x] Found go 1.18 pclntab data.
-[x] Recovered 4794 symbols and saved them at sym.go.*
-[x] Analyze all flags starting with sym.go. (aF @@f:sym.go.*)
-[x] Analyze all instructions to recover all strings used in sym.go.*
-[x] Recovered 3448 strings from the sym.go.* functions.
-
-```
-
--   A new Intermediate Language  [RzIL](https://github.com/rizinorg/rizin/blob/dev/doc/rzil.md)  has been introduced in Rizin, primarily intended for representing the semantics of machine code and designed as a clone of  [BAP's Core Theory](https://binaryanalysisplatform.github.io/bap/api/master/bap-core-theory/Bap_core_theory/index.html). It is going to replace ESIL in the future, even though they will both live within Rizin for the time being. ARM32, ARM64, AVR, and 6502 assemblies can already be lifted to RzIL, allowing you to emulate code without running it. Some of the reasons that moved us away from ESIL are: its lack of typing, for example it was hard to discern accesses of different signs, sizes, and bool from integer; its hard to read string representation; being all string-based without a real structure.
-    
-    As many reverse engineers are familiar with the concept of  [SMT (Satisfiability Modulo Theories)](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories), RzIL should be familiar as well. In essence, it's a superset of  [SMT Bitvectors](https://smtlib.cs.uiowa.edu/theories-FixedSizeBitVectors.shtml)  theory plus  [SMT Arrays](https://smtlib.cs.uiowa.edu/theories-ArraysEx.shtml)  (Bitvector-indexed arrays of Bitvectors to represent memory), and Effects (to represent side effects, like jump or branch). Thus, main core concept that was added in Rizin is the algebra of bitvectors, with corresponding functions in RzUtil. Moreover, the readable representation of RzIL was added, in a form of S-expressions:
-    
-
-```
-$ rz-asm -a arm -b 32 -d 1233a0e1
-lsl r3, r2, r3
-$ rz-asm -a arm -b 32 -I 1233a0e1
-(set r3 (&lt;&lt; (var r2) (cast 8 false (var r3)) false))
-
-```
-
--   Sometimes when reverse engineering a firmware you get just a raw binary, without any structured file format (e.g. ELF). Finding the base address where the raw data is supposed to be run from is often a tedius process. We now try to automate the identification of few possible candidates addresses through the new  `B`  command.
-
-```
-$ rizin -e log.level=3 -qc B stm32f103-dapboot-v1.20-bluepill.bin
-INFO: basefind: located 7 strings
-INFO: basefind: located 1459 pointers
-score candidate  
------------------
-4     0x08000000
-1     0x79ca6000
-
-```
-
-# Improvements
-
--   Improved analysis on DEX files, especially on cross-references to imports.
--   GPL code can be now disabled via  `-Duse_gpl=false`
--   rz-diff  `-H`  option now supports infinite scrolling when binary diffing.
--   Improved accuracy of the strings search and EBCDIC encoding support.
--   Significant improvement of the Hexagon disassembly and analysis.
-
-# Extras
-
--   [FLIRT signature database](https://github.com/rizinorg/sigdb)  is the database generated from  [rizinorg/sigdb-source](https://github.com/rizinorg/sigdb-source), used as a library of signatures that can be automatically recognized in the binaries you analyze. It can be installed via the meson option  `-Dinstall_sigdb=true`  while installing Rizin from source or added later via  `e flirt.sigdb.path=path/to/sigdb`.
--   [rz-libyara](https://github.com/rizinorg/rz-libyara)  is now available as RzCore plugin for parsing and creating yara rules.
--   [rz-libdemangle](https://github.com/rizinorg/rz-libdemangle)  is our extracted library providing APIs to demangle symbols for various languages. It currently supports C++, Rust, Swift, Java, MSVC and ObjC. C++ and Rust are under GPL license and they can be compiled out if necessary. As a standalone library it can be used by any other project, so try it out if you need it!
--   [Official Apple swift demangler](https://github.com/rizinorg/rz-libswift)  is now available as RzDemangler plugin.
--   [rz-retdec](https://github.com/rizinorg/rz-retdec)  Retdec decompiler plugin for Rizin
--   [rz-libmc7](https://github.com/rizinorg/rz-libmc7)  Siemens Simatic S7 bytecode dissassembler
--   [rz-tracetest](https://github.com/rizinorg/rz-tracetest)  a testing tool for the correctness of RzIL lifters, which compares executions of instructions from a real trace against the result of executing the same instructions in the RzIL VM. This is a very important piece to ensure that our RzIL lifters produce good results.
-
-----------
-
-# Build
-
--   fix versions of the Rizin libraries so that patch releases do not require a recompilation of dependent programs
--   completely switch to Meson subprojects and removal of  `shlr`  directory
--   add  `-Wimplicit-fallthrough=3`  compiler flag by default when supported
--   add option to download and install sigdb together with Rizin
-
-# RzUtil
-
--   Fixes the portable build so that themes and other resources are loaded when the whole portable installation directory is moved
--   Several fixes, cleaning API, adding documentation to existing API
--   Removal of various unused functions and general cleanup of the library.
--   Add RzBitVector API, extensively used in RzIL
--   Add new type of RzBuffer based on RzIO
--   String types, structures and search has been refactored to unify its usages across RzUtil, RzAnalysis and RzCore.
-
-# RzType
-
--   Fix printing of several types
--   Add API for pretty printing of types and reuse it whenever possible
--   Parse comments in types definitions
--   Fix self-referential typedefs parsing
--   Separate variadic argument in a different grammar token
--   Improve error message when types are redefined
-
-# RzSignature
-
--   FLIRT  `.pat`  files are now parsed and applied via  `zfs`
--   FLIRT  `.sig`  and  `.pat`  files can now be created via  `zfc`.
--   rz-sign has been rewritten to create, dump and convert (in both ways)`.pat`  and  `.sig`  FLIRT files.
--   Fixed endianness issues on FLIRT  `.sig`  files.
--   Support for FLIRT signature database which is now applied in the analysis step or manually via  `aaF`  (use  `aaFl`  to list the database signatures)
--   rz_sign is now a standalone library.
-
-# RzIO
-
--   Add  `shm://`  support on Android and Windows
--   Partial support for loading all files included in  `.a/.lib`  archive files
--   Fix opening of multi-dex files with proper base address
--   Several improvements and fixes to WinKD, WinDBG and DMP plugins
-
-# RzHash
-
--   `RSA-MD`  licensed code has been replaced with  `LGPL`  implementation.
--   Small refactoring to fix some null dereference bugs when openssl is used.
-
-# RzDemangler
-
--   New library to demangle symbol names in various languages, extensible by plugins
--   By default uses libdemangle for  `C++`,  `Rust`,  `Swift`,  `Java`,  `MSVC`,  `Obj-C`
-
-# RzDebug
-
--   Add support for coredump generation on NetBSD and FreeBSD
--   Add support for file descriptors listing on NetBSD
--   Add serialization functionality for breakpoints, so they can be saved/restored to/from projects
--   Fix signal handling on NetBSD
--   Several fixes and improvements for WinDBG, WinKD, DMP plugins
--   Add support for Windows on ARM
--   Add support for debugging DMP files
--   Add unit tests for software breakpoints
--   Add support for getting backtraces from a Windows Kernel Dump for x64
-
-# RzCrypto
-
--   Replaced  `MS-PL`  AES code with  `LGPL`  implementation from Nettle.
--   Fixed various endianness issues on some algorithms.
--   Rewrite of ESIL implementation of  `DES &lt;k&gt;`  opcode for AVR arch.
-
-# RzCons
-
--   Fix bug on Windows when  `e scr.vtmode=1`
--   Fix visual panels mode on Windows, which was not restoring terminal mode correctly
--   Fixes 'ctrl+arrow and 'alt+arrow key' in the shell
--   Fix console settings after  `rizin -`  on Linux
--   Add durian color theme based on summerfruit.vim
--   Remove editor features
--   Remove global variables
--   Retain prompt when exiting using ^D
-
-# RzBreakpoint
-
--   Add serialization of breakpoints
--   Add unit tests for software breakpoints
--   Make dcu fail on failed bp instead of blindly continuing
--   Make breakpoint size respect address-specific bits
-
-# RzBin
-
-## DEX
-
--   Implement vfiles to support relocations on dex binaries
--   Resolved big bottleneck which improved parsing performances
--   Added support for imports resolved by direct_methods via super calls
-
-## PE/PDB/DMP
-
--   Rewrite PDB parser
--   Small fixes and improvements to PE parser
--   Add Triage Dump (Minidump) parsing support for dmp64 bin plugin
-
-## ELF/DWARF
-
--   Still refactoring of the ELF plugin
--   Fix some relocations in ARM, Hexagon, PowerPC (including big endian) and related patching.
--   Fix  `main()`  retrieval of  `/bin/ls`  binary on Fedora 35/36
--   Several bug fixes in DWARF
-
-## Mach-O
-
--   Refactor Mach-O relocations patching and convert to RzBinVirtualFile
--   Refactor bin_xnu_kernelcache to use RzBinVirtualFile
--   Add Support For dyld4 Atlas-style Shared Library Caches
--   Add support for DYLD_CHAINED_PTR_64_OFFSET ([#1996](https://github.com/rizinorg/rizin/pull/1996))
--   Add support for DYLD_CHAINED_PTR_ARM64E_USERLAND24 ([#2197](https://github.com/rizinorg/rizin/pull/2197))
--   Fix  [CVE-2022-1240](https://github.com/advisories/GHSA-m6g3-mrp2-c625 "CVE-2022-1240")  and  [CVE-2022-1244](https://github.com/advisories/GHSA-pm2f-322j-vg72 "CVE-2022-1244")
-
-## Others
-
--   Rewrite bFLT plugin
--   Identify  `.bf`  extension as brainfuck if the content is not recognized otherwise
--   Add support for SH, MIPS and ARM to the COFF format
--   Fix several format parsing on big endian platforms
--   Fix memory leaks in the way SDB was used within RzBin
--   Fix vaddr/paddr when doing string scanning
--   Add API to convert paddr/vaddr based on binary info only
--   Recover Golang symbols for 1.2/1.16/1.18+ when the right sections are found in the binary
-
-# RzAsm/RzAnalysis
-
--   Fixed RzAnalysisOp info returned on PowerPC and RISC-V archs.
--   Improved dalvik analysis when move-exception appears after a gotos or return or mid-opcode jump.
--   Improved dalvik analysis by resolving jumps via invoke-xxx/range
--   Added missing Python magic values for new python versions.
--   Improved Hexagon to support compact struct conversion.
--   Implemented golang string recovery for x86/x64/PowerPC/MIPS/ARM/RISC-V.
--   Refactoring RzAnalysis (like removal of  `cb_printf()`  from RzAnalysis, usage of  `-Wimplicit-fallthrough`, etc..)
--   Refactor ARM analysis to handle 4-byte IT-opcodes
--   Reduced registers shown in the output of  `dr`  and  `Vpp`  when analysing an ARM64 bin
--   Remove  `analysis.endsize`  config variable, improving the analysis results of several binaries, where functions were not properly analyzed due to conditional jumps only having one following basic block instead of two.
--   Separation of fpu and gpr in arm64 reg profile
--   Fix infinite loop if first case of switch table points to same block
--   Fix integer overflow and excessive memory usage in jump table analysis
-
-# RzShell
-
--   `aa`,  `af`,  `ar`,  `av`,  `ax`,  `ah`,  `ac`,  `a8`,  `aO`,  `ao`,  `an`,  `ab`,  `as`,  `b`,  `c`,  `db`,  `do`,  `ds`,  `dt`,  `dl`,  `dr`,  `g`,  `o`,  `y`,  `ec`,  `f`,  `i`,  `C`,  `pc`,  `pd`,  `pm`,  `psW`,  `r`,  `w`  commands and subcommands were converted to RzShell
--   several  `ae`  subcommands were converted to RzShell
--   `B`  commands for base-address computation were added
--   `..(`  command was added to call a macro multiple times with arguments taken  `n`  at a time.
--   `zfc`  has been added to create FLIRT signature files
--   `dex&lt;se&gt;`  has been added to visualize dex class information, like you can do with  `java&lt;cfimpsr&gt;`  command for java classes.
--   `0x`  command was removed in favour of  `s 0x....`
--   shell commands were grouped under  `shell?`  (e.g.  `echo`,  `cat`,  `ls`,  `rm`, etc.)
-
-**Full Changelog**:  [v0.3.4...v0.4.0](https://github.com/rizinorg/rizin/compare/v0.3.4...v0.4.0)
+**Full Changelog**:  [v0.4.0...v0.4.1](https://github.com/rizinorg/rizin/compare/v0.4.0...v0.4.1)
     </releaseNotes>
   </metadata>
   <files>
