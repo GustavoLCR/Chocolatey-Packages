@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop';
 
-$version = "v2.1.0"
+$version = "v2.1.1"
 $packageName = "Cutter-$version-Windows-x86_64"
 $zipFile = "$packageName.zip"
 $installRootDir = $env:ChocolateyPackageFolder
@@ -10,7 +10,7 @@ $packageArgs = @{
   PackageName    = $env:ChocolateyPackageName
   unzipLocation  = $installRootDir
   url64bit       = "https://github.com/rizinorg/cutter/releases/download/$version/$zipFile"
-  checksum64     = '73329193663E219354D4BC65937F4323875EB2524CDDF2FD013B202F0BCFCD8B'
+  checksum64     = 'C1DF23FC5BC700864019B061717AC247E8726445D590F7C6FF2944D777E6D3D5'
   checksumType64 = 'sha256'
 }
 
