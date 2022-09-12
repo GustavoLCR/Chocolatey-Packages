@@ -5,5 +5,7 @@ if ($doDeleteCfg.Contains("y")) {
 
 $shortcutName = '\Cutter.lnk'
 
-Remove-Item -Path $([Environment]::GetFolderPath("Desktop") + $shortcutName) -ErrorAction SilentlyContinue
-Remove-Item -Path $([Environment]::GetFolderPath("StartMenu") + $shortcutName) -ErrorAction SilentlyContinue
+Remove-Item -Path $([Environment]::GetFolderPath('DesktopDirectory') + $shortcutName) -ErrorAction SilentlyContinue
+Remove-Item -Path $([Environment]::GetFolderPath('StartMenu') + '\Programs' + $shortcutName) -ErrorAction SilentlyContinue
+Remove-Item -Path $([Environment]::GetFolderPath('CommonDesktopDirectory') + $shortcutName) -ErrorAction SilentlyContinue
+Remove-Item -Path $([Environment]::GetFolderPath('CommonStartMenu') + '\Programs' + $shortcutName) -ErrorAction SilentlyContinue

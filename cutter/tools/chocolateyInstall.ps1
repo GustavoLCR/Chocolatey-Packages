@@ -3,7 +3,13 @@ $ErrorActionPreference = 'Stop';
 $version = "v2.1.1"
 $packageName = "Cutter-$version-Windows-x86_64"
 $zipFile = "$packageName.zip"
-$installRootDir = $env:ChocolateyPackageFolder
+$isAdmin = Test-ProcessAdminRights
+if ($isAdmin) {
+  $installRootDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+}
+else {
+  $installRootDir = "$env:LOCALAPPDATA\\RizinOrg"
+}
 $installDir = "$installRootDir\\$packageName"
 
 $packageArgs = @{
@@ -26,14 +32,18 @@ $shortcutArgs = @{
 }
 $shortcutName = '\Cutter.lnk'
 
+if ($isAdmin) {
+  $common = 'Common'
+}
+
 $doCreateShortcut = Read-Host "Do you want to create a shortcut in the Desktop? (Y/n)"
 if (!$doCreateShortcut -or $doCreateShortcut.Contains('y')) {
-  Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath  $([Environment]::GetFolderPath("Desktop") + $shortcutName)
+  Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath  $([Environment]::GetFolderPath($common + 'DesktopDirectory') + $shortcutName)
 }
 
 $doCreateShortcut = Read-Host "Do you want to create a shortcut in the Start Menu? (Y/n)"
 if (!$doCreateShortcut -or $doCreateShortcut.Contains('y')) {
-  Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath $([Environment]::GetFolderPath("StartMenu") + $shortcutName)
+  Install-ChocolateyShortcut @shortcutArgs -ShortcutFilePath $([Environment]::GetFolderPath($common + 'StartMenu') + '\Programs' + $shortcutName)
 }
 
 Remove-Item -Path "$installRootDir\\$zipFile" -ErrorAction SilentlyContinue
