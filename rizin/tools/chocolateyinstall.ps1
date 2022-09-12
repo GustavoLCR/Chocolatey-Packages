@@ -6,9 +6,8 @@ $url64 = "https://github.com/rizinorg/rizin/releases/download/$version/rizin_ins
 
 $packageArgs = @{
   packageName    = $env:ChocolateyPackageName
-  unzipLocation  = $env:ChocolateyPackageFolder
   filetype       = 'exe'
-  silentArgs     = '/VERYSILENT /CURRENTUSER /NORESTART'
+  silentArgs     = '/VERYSILENT /NORESTART'
   url            = $url
   url64bit       = $url64
   checksum       = '4476E42DE1DFBA64B70427C811F908E01509BE182491556790EFFDB48215B484'

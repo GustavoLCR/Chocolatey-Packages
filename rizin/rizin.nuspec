@@ -17,7 +17,7 @@
     <projectSourceUrl>https://github.com/rizinorg/rizin</projectSourceUrl>
     <docsUrl>https://book.rizin.re/</docsUrl>
     <bugTrackerUrl>https://github.com/rizinorg/rizin/issues</bugTrackerUrl>
-    <tags>rizin debugging security reverse-engineering program-analysis exploitation</tags>
+    <tags>rizin debugging security reverse-engineering program-analysis exploitation admin</tags>
     <summary>Rizin is a fork of the radare2 reverse engineering framework with a focus on usability, working features and code cleanliness.</summary>
     <description>
 # Rizin
