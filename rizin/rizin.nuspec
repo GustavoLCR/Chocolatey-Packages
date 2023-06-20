@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>rizin</id>
-    <version>0.4.1</version>
+    <version>0.5.2</version>
     <packageSourceUrl>https://github.com/GustavoLCR/Chocolatey-Packages</packageSourceUrl>
     <owners>GustavoLCR</owners>
 
@@ -78,61 +78,8 @@ We also provide the following partial bridges to other messaging platforms:
     </description>
     <releaseNotes>
 
-This release contains a few important security fixes:
+**Full Changelog**:  [v0.4.1...v0.5.2](https://github.com/rizinorg/rizin/compare/v0.4.1...v0.5.2)
 
--   [CVE-2022-36043](https://github.com/rizinorg/rizin/security/advisories/GHSA-rjhv-mj4g-j4p5)
--   [CVE-2022-36040](https://github.com/rizinorg/rizin/security/advisories/GHSA-h897-rhm9-rpmw)
--   [CVE-2022-36041](https://github.com/rizinorg/rizin/security/advisories/GHSA-2c7m-2f37-mr5m)
--   [CVE-2022-36039](https://github.com/rizinorg/rizin/security/advisories/GHSA-pr85-hv85-45pg)
--   [CVE-2022-36044](https://github.com/rizinorg/rizin/security/advisories/GHSA-mqcj-82c6-gh5q)
--   [CVE-2022-36042](https://github.com/rizinorg/rizin/security/advisories/GHSA-pf72-jg54-8gvp)
-
-Apart from those, were fixed:
-
--   Various minor packaging and installation issues and improvements
--   Various minor fixes on big-endian platforms
--   GCC 12 compilation warnings.
--   Update libzip to v1.9.2
--   Update rz-libdemangle
--   Fix  - wrong AVR analysis jump value for rjmp/rcall
--   Fix the crash of command  `fg`
--   Fix  `pg`  with fewer than 5 arguments
--   Fix  `afx`  command JSON output
--   Print graph when dmhg is executed
--   Fix the heap overflow in TUI
--   Fix for file sharing permission on Windows
--   Fix  - oob read in pe_section.c
--   Fix  - oob read in pe/pe.c and bin/golang.c
--   Fix  - oob read in coresymbolication.c and in bin_dyldcache.c
--   Fix  - oob read in ne.c
--   Fix  - null deref dwarf_process.c
--   Fix  - null deref in mdmp.c
--   Fix  - null deref and div by zero in mach0_rebase.c
--   Fix  - oob read in bin.c
--   Fix  - oob read in coresymbolication.c
--   Fix  - oob read in dwarf.c
--   Fix  - oob read in dex.c
--   Fix  - oob read in dex.c
--   Fix  - oob read in magic/funcs.c
--   Fix  - null deref in dyldcache.c
--   Fix  - Check rz_buf_read_le32_offset return status parsing LE bins
--   Fix integer overflow in mach0
--   Fix oob read on luac
--   Fix RzBitmap length type and added ownership and checks.
--   Fix strdup on nullptr in rz_core_bin_apply_strings
--   Fix oob read on _luac_build_info and luac memleaks
--   Fix oob read on rz_pkcs7_parse_spcdata
--   Fix oob read on rz_x509_parse_tbscertificate
--   Fix oob read and endian dependency in asm_ebc
--   Fix OOB read in 6502 analysis plugin.
--   Fix reset followed by color change in rz_cons_html_filter
--   Fix always true if due wrong check in search
--   Fix the failure of switching panel command
--   Fix double free of enum member name
--   core_search_for_xrefs_in_boundaries omits the negative return value
--   Fix the crash caused by get_long_object()
-
-**Full Changelog**:  [v0.4.0...v0.4.1](https://github.com/rizinorg/rizin/compare/v0.4.0...v0.4.1)
     </releaseNotes>
   </metadata>
   <files>
